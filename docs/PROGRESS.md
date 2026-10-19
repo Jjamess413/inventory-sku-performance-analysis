@@ -29,10 +29,12 @@ The initial code and documentation were developed with AI-assisted scaffolding. 
 - [x] Verify execution of the guided October date-filter example.
 - [x] Review the owner's November WHERE/HAVING modification and basic row-versus-group explanation. The corrected 5,000-unit query returns seven matching rows. Whole-query authorship without a scaffold has not been assessed.
 
+- [x] Verify the owner's product-description INNER JOIN result and `AS product_name` modification. All seven SKU quantities and sales values reconcile with the pre-join November result. Independent matching-key and join-grain explanations remain pending.
+
 ## Next actions
 
 - [ ] Run the 10 business-rule unit tests and saved-query runner on James's Windows environment; review the actual output.
-- [ ] Run the product-description INNER JOIN example in DB Browser, confirm unchanged quantities and values, and explain the matching keys.
+- [ ] Explain matching keys and row grain; run the duplicate-SKU count query and explain how repeated product matches could inflate an aggregate.
 - [ ] Practise join grain, unique dimension keys and LEFT JOIN checks for missing matches; review the owner's explanation.
 - [ ] Confirm James's local Power BI environment and guide the first import.
 - [ ] Build the star schema and reconcile the first two measures in Desktop.
