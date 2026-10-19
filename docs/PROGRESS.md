@@ -29,13 +29,16 @@ The initial code and documentation were developed with AI-assisted scaffolding. 
 - [x] Verify execution of the guided October date-filter example.
 - [x] Review the owner's November WHERE/HAVING modification and basic row-versus-group explanation. The corrected 5,000-unit query returns seven matching rows. Whole-query authorship without a scaffold has not been assessed.
 
-- [x] Verify the owner's product-description INNER JOIN result and `AS product_name` modification. All seven SKU quantities and sales values reconcile with the pre-join November result. Independent matching-key and join-grain explanations remain pending.
+- [x] Verify the owner's product-description INNER JOIN result and `AS product_name` modification. All seven SKU quantities and sales values reconcile with the pre-join November result. A fuller independent matching-key and row-preservation explanation remains pending.
+
+- [x] Review the owner's duplicate-match thought exercise: two matches for one 10-unit line yield two rows and a sum of 20. This is a teaching scenario.
+- [x] Record the owner's reported zero-row LEFT JOIN missing-product result, consistent with the mentor's model check. Clarify that LEFT JOIN preserves rows; the owner's corrected explanation remains to be reviewed.
 
 ## Next actions
 
 - [ ] Run the 10 business-rule unit tests and saved-query runner on James's Windows environment; review the actual output.
-- [ ] Explain matching keys and row grain; run the duplicate-SKU count query and explain how repeated product matches could inflate an aggregate.
-- [ ] Practise join grain, unique dimension keys and LEFT JOIN checks for missing matches; review the owner's explanation.
+- [ ] Run and report the duplicate-SKU count query; independently explain matching keys and corrected LEFT JOIN row preservation.
+- [ ] Run the CASE WHEN November volume-band example, modify a threshold and explain first-matching-condition behaviour.
 - [ ] Confirm James's local Power BI environment and guide the first import.
 - [ ] Build the star schema and reconcile the first two measures in Desktop.
 - [ ] Complete the three report pages, test interactions and save the actual PBIX.
