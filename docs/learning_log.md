@@ -1,6 +1,6 @@
 # Owner learning log
 
-One independently modified SQL submission has been reviewed. Core aggregation and ranking are correct; a small secondary-sort correction remains pending.
+The first independently modified SQL submission and grouping explanation have been reviewed. The requested secondary SKU sort has now been observed in an owner-run query. Independent November filtering and HAVING explanation remain pending.
 
 ## Guided execution observed: 19 October 2026
 
@@ -37,16 +37,18 @@ Owner explanation, translated from Chinese: "Group by SKU combines all sales rec
 
 **Review:** the grouping explanation, descending volume ranking and ten-row limit are correct. More precisely, `GROUP BY` forms one group per SKU within `v_sales`, while `SUM` calculates the totals for each group. This query returns one row per SKU and leaves the underlying transaction records unchanged.
 
-**Small correction requested:** retain `sku` as the secondary sort, giving `ORDER BY units_sold DESC, sku`. It makes tied-volume ordering explicit. The submitted ten rows have distinct volumes, so this omission does not alter the observed result; the requested correction has not yet been observed in an owner-run query.
+**Correction verified:** the owner's subsequent October query includes `ORDER BY units_sold DESC, sku`. All ten result rows match an independent read-only query. SKUs 21915 and 22178 both have 3,320 units and appear in ascending SKU order, demonstrating the tie-breaker on an actual tie. The original submission above remains unchanged as a record of the first attempt.
 
-**Next learning step:** add a date condition before aggregation, then introduce `HAVING` for a minimum monthly volume. The November exercise remains pending.
+**Guided date filter observed:** the owner executed the supplied October example with `WHERE date >= '2011-10-01' AND date < '2011-11-01'` before `GROUP BY`. The top SKU is 84077 with 8,180 units. The owner asked about TEXT date storage and comparisons, then reported understanding the explanation; an independent explanation has not yet been reviewed.
+
+**Next learning step:** combine a November date filter with `HAVING SUM(quantity) >= 100`, then independently change the minimum to 5,000 and explain why the aggregate condition belongs in HAVING. The mentor reference query has been run: November has 2,889 SKUs with positive sales, of which 1,213 have at least 100 units. These reference results do not mark the owner's November exercise complete.
 
 ## Exercise review
 
 | Topic | Owner explanation or query | Review status |
 | --- | --- | --- |
-| Top-ten volume ranking and `GROUP BY sku` explanation | Owner SQL and grouping explanation reviewed; all ten result rows match | Core logic correct; secondary SKU sort requested |
-| November SKU query: WHERE and HAVING | Pending owner submission | Pending |
+| Top-ten volume ranking and `GROUP BY sku` explanation | Owner modification and explanation correct; secondary SKU sort observed in subsequent October query | Reviewed; requested correction verified |
+| November SKU query: WHERE and HAVING | Guided October filter observed; November query and aggregate-filter explanation pending | Pending owner submission |
 | Join grain and duplicate keys | Pending | Pending |
 | ABC cumulative window | Pending | Pending |
 | Zero-sale days and inventory assumptions | Pending | Pending |
