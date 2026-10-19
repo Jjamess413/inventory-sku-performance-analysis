@@ -26,13 +26,14 @@ The initial code and documentation were developed with AI-assisted scaffolding. 
 - [x] James extracts the project ZIP, creates a local Python environment and completes the first Windows build. The owner-provided terminal screenshot shows Python 3.13.16, pandas 3.0.6, PASS on 14 pipeline checks, 511,035 model rows and 3,789 model SKUs. Windows unit tests and saved-query runner output remain to be reviewed.
 - [x] James opens the generated database in DB Browser for SQLite and executes the supplied top-five sales query. All five rows in the owner-provided result screenshot match the reference results. This confirms guided execution; the subsequent modified-query review is recorded below.
 - [x] Review James's first modified SQL submission and grouping explanation. The ten-row descending-volume result matches the reference. The requested secondary SKU sort is verified in his subsequent October query, including an actual 3,320-unit tie.
-- [x] Verify execution of the guided October date-filter example. November filtering, HAVING and an independent explanation remain pending.
+- [x] Verify execution of the guided October date-filter example.
+- [x] Review the owner's November WHERE/HAVING modification and basic row-versus-group explanation. The corrected 5,000-unit query returns seven matching rows. Whole-query authorship without a scaffold has not been assessed.
 
 ## Next actions
 
 - [ ] Run the 10 business-rule unit tests and saved-query runner on James's Windows environment; review the actual output.
-- [ ] James runs the November WHERE/HAVING example, modifies its minimum monthly volume and explains the difference between row and group filters.
-- [ ] Review the answer and update the learning log with actual feedback.
+- [ ] Run the product-description INNER JOIN example in DB Browser, confirm unchanged quantities and values, and explain the matching keys.
+- [ ] Practise join grain, unique dimension keys and LEFT JOIN checks for missing matches; review the owner's explanation.
 - [ ] Confirm James's local Power BI environment and guide the first import.
 - [ ] Build the star schema and reconcile the first two measures in Desktop.
 - [ ] Complete the three report pages, test interactions and save the actual PBIX.
