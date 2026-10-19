@@ -1,6 +1,6 @@
 # Owner learning log
 
-The owner's initial aggregation/ranking exercise and modified November WHERE/HAVING query have been reviewed. The requested secondary SKU sort is verified. Basic row-versus-group filtering has been explained; JOIN practice, later analytical concepts and Desktop validation remain pending.
+The owner's aggregation/ranking exercise, modified November WHERE/HAVING query and guided product-lookup query have been reviewed. The secondary SKU sort and `product_name` column alias are verified. Join grain, duplicate/missing keys, later analytical concepts and Desktop validation remain pending.
 
 ## Guided execution observed: 19 October 2026
 
@@ -76,7 +76,35 @@ Owner explanation, translated from Chinese: "Quantity is the number for an indiv
 
 The owner initially reported 1,213 rows, which corresponds to the 100-unit reference. After changing the threshold and rerunning, the screenshot confirms seven rows for 5,000 units. Basic row-versus-group filtering is reviewed at this level; this is not evidence of writing the whole query without a scaffold.
 
-**Next learning step:** use an INNER JOIN to attach the product description from `dim_sku`. The mentor has checked the example against the database: the same seven SKUs, quantities and sales values are retained; product keys are unique and sales keys have no missing product matches. Owner-run JOIN output and an explanation are still pending.
+**Product-lookup reference:** the mentor checked the INNER JOIN example against the database: the same seven SKUs, quantities and sales values are retained; product keys are unique and sales keys have no missing product matches. Owner execution is reviewed below; independent join-grain explanation remains pending.
+
+## Exercise 3 review: product lookup and column alias
+
+James executed the supplied INNER JOIN query and independently changed the displayed product-name column to `p.description AS product_name`. His screenshot shows seven rows with product names and the same SKU quantities and sales values as the pre-join November result.
+
+Owner-executed SQL, modified from the mentor scaffold:
+
+```sql
+SELECT
+    s.sku,
+    p.description AS product_name,
+    SUM(s.quantity) AS units_sold,
+    ROUND(SUM(s.revenue_pence) / 100.0, 2) AS gross_sales_gbp
+FROM v_sales AS s
+INNER JOIN dim_sku AS p
+    ON s.sku = p.sku
+WHERE s.date >= '2011-11-01'
+  AND s.date < '2011-12-01'
+GROUP BY s.sku, p.description
+HAVING SUM(s.quantity) >= 5000
+ORDER BY units_sold DESC, s.sku;
+```
+
+**Review:** the column alias is correct and is visible as `product_name` in the returned results. The grouping continues to use the source field `p.description`. SKU 23084 has the description RABBIT NIGHT LIGHT, 14,954 units and GBP 34,556.72 in gross sales. All seven product names and metric values match the mentor's previously verified reference.
+
+This verifies guided JOIN execution and the owner's column-alias modification. An independent explanation of the matching keys, one-row-per-SKU dimension grain and duplicate-key risks remains to be reviewed.
+
+**Next learning step:** inspect `COUNT(*)` by product SKU with `HAVING COUNT(*) > 1`, then discuss how duplicate product matches can multiply transaction rows. The current product dimension has no duplicate SKU keys; the owner's check and explanation are pending. Follow with a LEFT JOIN check for missing product matches.
 
 ## Exercise review
 
@@ -84,7 +112,8 @@ The owner initially reported 1,213 rows, which corresponds to the 100-unit refer
 | --- | --- | --- |
 | Top-ten volume ranking and `GROUP BY sku` explanation | Owner modification and explanation correct; secondary SKU sort observed in subsequent October query | Reviewed; requested correction verified |
 | November SKU query: WHERE and HAVING | Modified mentor scaffold; seven rows verified at a 5,000-unit threshold; line-level quantity explanation reviewed | Reviewed at basic exercise level |
-| Join grain and duplicate keys | Mentor lookup example validated; owner execution and explanation pending | Pending |
+| Product-lookup INNER JOIN and column alias | Seven named SKU rows reconcile; owner applied `AS product_name` correctly | Execution and modification reviewed |
+| Join grain and duplicate/missing keys | Owner duplicate-key check and independent explanation pending | Pending |
 | ABC cumulative window | Pending | Pending |
 | Zero-sale days and inventory assumptions | Pending | Pending |
 | Power BI relationships and DAX | Pending | Pending |
