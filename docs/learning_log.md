@@ -1,6 +1,6 @@
 # Owner learning log
 
-The owner's aggregation/ranking exercise, modified November WHERE/HAVING query and guided product-lookup query have been reviewed. The secondary SKU sort and `product_name` column alias are verified. Join grain, duplicate/missing keys, later analytical concepts and Desktop validation remain pending.
+The owner's aggregation/ranking exercise, modified November WHERE/HAVING query and guided product lookup have been reviewed. The secondary SKU sort and `product_name` column alias are verified. The duplicate-match thought exercise is correct, and the owner reports zero missing product matches. Further join checks, independent explanations, later analytical concepts and Desktop validation remain pending.
 
 ## Guided execution observed: 19 October 2026
 
@@ -102,9 +102,13 @@ ORDER BY units_sold DESC, s.sku;
 
 **Review:** the column alias is correct and is visible as `product_name` in the returned results. The grouping continues to use the source field `p.description`. SKU 23084 has the description RABBIT NIGHT LIGHT, 14,954 units and GBP 34,556.72 in gross sales. All seven product names and metric values match the mentor's previously verified reference.
 
-This verifies guided JOIN execution and the owner's column-alias modification. An independent explanation of the matching keys, one-row-per-SKU dimension grain and duplicate-key risks remains to be reviewed.
+This verifies guided JOIN execution and the owner's column-alias modification. The duplicate-match thought exercise is reviewed below; a fuller independent explanation of matching keys and row preservation remains pending.
 
-**Next learning step:** inspect `COUNT(*)` by product SKU with `HAVING COUNT(*) > 1`, then discuss how duplicate product matches can multiply transaction rows. The current product dimension has no duplicate SKU keys; the owner's check and explanation are pending. Follow with a LEFT JOIN check for missing product matches.
+**Join-validation follow-up:** James correctly answered the teaching scenario: two matching product rows produce two joined rows for one 10-unit sales line, giving a summed quantity of 20. This is a hypothetical example, not an observed duplicate in the project data. The mentor's duplicate-key check returns no duplicates; James's execution result for that separate check has not been supplied.
+
+James reports zero rows for the supplied LEFT JOIN missing-product check, consistent with the mentor's existing validation. This is recorded as an owner-reported result; a new query screenshot was not supplied. He initially described LEFT JOIN as preserving columns. Feedback clarified that it preserves left-side rows at the join step, that SELECT chooses the output columns, and that a later WHERE condition can filter the joined rows. An independent restatement of that correction remains pending.
+
+**Next learning step: CASE WHEN.** A mentor-prepared November volume-band example has been validated against the model. The teaching thresholds are at least 10,000 units for High volume, at least 5,000 for Medium volume, and otherwise Lower volume; conditions are evaluated in that order. These illustrative labels are not the project's revenue-based ABC policy or a stock recommendation. Across all 2,889 November sales SKUs, the reference counts are 2 high, 5 medium and 2,882 lower. The owner's query execution, threshold change and explanation are pending.
 
 ## Exercise review
 
@@ -113,7 +117,8 @@ This verifies guided JOIN execution and the owner's column-alias modification. A
 | Top-ten volume ranking and `GROUP BY sku` explanation | Owner modification and explanation correct; secondary SKU sort observed in subsequent October query | Reviewed; requested correction verified |
 | November SKU query: WHERE and HAVING | Modified mentor scaffold; seven rows verified at a 5,000-unit threshold; line-level quantity explanation reviewed | Reviewed at basic exercise level |
 | Product-lookup INNER JOIN and column alias | Seven named SKU rows reconcile; owner applied `AS product_name` correctly | Execution and modification reviewed |
-| Join grain and duplicate/missing keys | Owner duplicate-key check and independent explanation pending | Pending |
+| Join grain and duplicate/missing keys | Duplicate-match scenario correct; owner reports zero missing matches; duplicate-count output and corrected row-preservation explanation pending | Partly reviewed |
+| CASE WHEN volume bands | Mentor example validated; owner execution and threshold exercise pending | Pending |
 | ABC cumulative window | Pending | Pending |
 | Zero-sale days and inventory assumptions | Pending | Pending |
 | Power BI relationships and DAX | Pending | Pending |
