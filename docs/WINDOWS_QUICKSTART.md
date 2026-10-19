@@ -2,7 +2,7 @@
 
 Use this guide to run the inventory project locally, inspect the results and begin the owner learning exercises.
 
-**Environment confirmed:** James uses Windows. Local software installation, the first owner-run query and Power BI Desktop validation are still pending. The commands below have been prepared from official documentation; they have not been executed on James's computer.
+**Environment confirmed:** James's first local Windows build passed all 14 pipeline checks on 19 October 2026, using Python 3.13.16 and pandas 3.0.6. The terminal output confirms 511,035 model rows and 3,789 model SKUs. Windows unit tests, the first owner-run SQL query and Power BI Desktop validation remain separate milestones.
 
 ## 1. Prepare the tools
 
@@ -21,19 +21,21 @@ Power BI Desktop is free to download. The Microsoft Store option supports automa
 For a new Python installation, install the official **Python install manager** and reopen PowerShell. Install the standard Python 3.13 runtime:
 
 ```powershell
-py install 3.13
+pymanager install 3.13
 py -3.13 --version
 ```
 
-If Python 3.11, 3.12 or 3.13 is already installed, keep that installation and use its version when creating the environment below, for example `py -3.12 -m venv .venv`. An older Python launcher may not recognise `py install`; it can still use an already installed runtime with `py -3.13`. Consult the official installer instructions if the requested runtime is missing.
+If Python 3.11, 3.12 or 3.13 is already installed, keep that installation and use its version when creating the environment below, for example `py -3.12 -m venv .venv`. An older Python launcher may take priority for the `py` command and reject `py install`; use `pymanager install 3.13` to install the runtime, then verify it with `py -3.13 --version`. If `pymanager` is unavailable, reopen PowerShell after installing the official manager and check the publisher's troubleshooting guidance.
 
-Project reference results were produced with Python 3.12.14 and pandas 2.2.3. A new local build records its actual versions in `reports/validation.json`; Windows compatibility still needs to be confirmed by running the steps.
+Initial project reference results were produced with Python 3.12.14 and pandas 2.2.3. The first owner-run Windows build also passed with Python 3.13.16 and pandas 3.0.6. A local build records its actual versions in `reports/validation.json`; the business-rule tests and Desktop checks must be verified separately.
 
 ## 2. Get the project
 
 Open [the repository](https://github.com/Jjamess413/inventory-sku-performance-analysis), choose **Code > Download ZIP**, then extract it.
 
-Open the extracted folder that contains `README.md`, `requirements.txt` and `scripts`. In File Explorer's address bar, type `powershell` and press Enter. PowerShell should open in that project folder.
+Use **Extract All** before opening the project: a File Explorer path containing `.zip` still refers to the archive. Open the extracted folder that contains `README.md`, `requirements.txt` and `scripts`.
+
+Press **Alt+D** in File Explorer to select its address bar, type `powershell` and press Enter. Check that the new window's `PS ... >` prompt ends in the project folder. If it shows only a drive root, copy the extracted folder's full path from File Explorer and use `Set-Location -LiteralPath "YOUR_EXTRACTED_PROJECT_PATH"`, replacing the placeholder with that actual path. Keep quotes around paths containing spaces. Run `Get-ChildItem` to confirm that `requirements.txt` and `scripts` are present before creating `.venv`.
 
 If you already have a local Git clone, use it instead. The ZIP route is enough for the first SQL exercise. Git version-control practice follows in [learning exercises](learning_exercises.md#git-practice).
 
@@ -61,7 +63,7 @@ Expected successful checks:
 - Unit tests report `Ran 10 tests` and `OK`.
 - The saved-query runner completes and writes `reports/query_validation.json` with `"passed": true` and `"queries_executed": 10`.
 
-These are reference expectations, not evidence that James has already run them.
+The first Windows build's 14 pipeline checks have been observed in James's terminal screenshot. The Windows unit-test and saved-query results have not yet been reviewed; the expectations above do not mark those tasks complete.
 
 If a command fails, stop and share the command and error text. Keep the source checksum check in place. If the publisher download is unavailable, the main README describes the official-workbook fallback.
 
