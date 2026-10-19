@@ -23,9 +23,12 @@ The initial code and documentation were developed with AI-assisted scaffolding. 
 - [x] Execute the pipeline, meaningful business-rule tests and saved business queries.
 - [x] Record actual findings, review candidates, assumptions and validation evidence.
 - [x] Prepare Power Query starters, DAX and the Desktop build/reconciliation guide.
+- [x] James extracts the project ZIP, creates a local Python environment and completes the first Windows build. The owner-provided terminal screenshot shows Python 3.13.16, pandas 3.0.6, PASS on 14 pipeline checks, 511,035 model rows and 3,789 model SKUs. Windows unit tests, saved-query execution and independent SQL explanation are separate checks still pending.
 
 ## Next actions
 
+- [ ] Run the 10 business-rule unit tests and saved-query runner on James's Windows environment; review the actual output.
+- [ ] Open the generated database in DB Browser for SQLite and run the first top-five SKU query.
 - [ ] James runs and explains the November SQL exercise in `learning_exercises.md`.
 - [ ] Review the answer and update the learning log with actual feedback.
 - [ ] Confirm James's local Power BI environment and guide the first import.
