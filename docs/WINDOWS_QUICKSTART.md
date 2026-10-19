@@ -2,7 +2,7 @@
 
 Use this guide to run the inventory project locally, inspect the results and begin the owner learning exercises.
 
-**Environment confirmed:** James's first local Windows build passed all 14 pipeline checks on 19 October 2026, using Python 3.13.16 and pandas 3.0.6. The terminal output confirms 511,035 model rows and 3,789 model SKUs. Windows unit tests, the first owner-run SQL query and Power BI Desktop validation remain separate milestones.
+**Environment confirmed:** James's first local Windows build passed all 14 pipeline checks on 19 October 2026, using Python 3.13.16 and pandas 3.0.6. The terminal output confirms 511,035 model rows and 3,789 model SKUs. Guided owner-run SQL queries and basic modifications have since been reviewed; see [the learning log](learning_log.md) for actual evidence and pending exercises. Windows unit tests, advanced exercises and Power BI Desktop validation remain separate milestones.
 
 ## 1. Prepare the tools
 
