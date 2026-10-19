@@ -1,0 +1,15 @@
+test_cancellation_is_negative_and_separate (test_business_rules.CleaningTests.test_cancellation_is_negative_and_separate) ... ok
+test_free_items_postage_and_unmatched_negative_entries_are_not_sales (test_business_rules.CleaningTests.test_free_items_postage_and_unmatched_negative_entries_are_not_sales) ... ok
+test_missing_customer_id_does_not_remove_sale (test_business_rules.CleaningTests.test_missing_customer_id_does_not_remove_sale) ... ok
+test_repeated_rows_are_flagged_and_retained (test_business_rules.CleaningTests.test_repeated_rows_are_flagged_and_retained) ... ok
+test_subpenny_price_rounds_half_up_before_quantity (test_business_rules.CleaningTests.test_subpenny_price_rounds_half_up_before_quantity) ... ok
+test_abc_includes_threshold_crossing_sku (test_business_rules.SQLTests.test_abc_includes_threshold_crossing_sku) ... ok
+test_manual_review_has_no_automatic_reorder (test_business_rules.SQLTests.test_manual_review_has_no_automatic_reorder) ... ok
+test_no_sale_days_are_included_in_mean_and_sample_std (test_business_rules.SQLTests.test_no_sale_days_are_included_in_mean_and_sample_std) ... ok
+test_scenario_is_reproducible (test_business_rules.SQLTests.test_scenario_is_reproducible) ... ok
+test_single_day_concentration_requires_review (test_business_rules.SQLTests.test_single_day_concentration_requires_review) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.040s
+
+OK

@@ -1,0 +1,106 @@
+
+02_business_queries.sql, question 1: 10 result rows; showing up to 10
+   sku                        description  units_sold  gross_sales_gbp
+ 22423           REGENCY CAKESTAND 3 TIER       13429        168477.87
+85123A WHITE HANGING HEART T-LIGHT HOLDER       37113        104085.75
+ 47566                      PARTY BUNTING       18159         98585.85
+85099B            JUMBO BAG RED RETROSPOT       47369         92113.15
+ 23166     MEDIUM CERAMIC TOP STORAGE JAR       77826         81448.21
+ 22086     PAPER CHAIN KIT 50'S CHRISTMAS       17266         58081.58
+ 23084                 RABBIT NIGHT LIGHT       26477         57321.97
+ 84879      ASSORTED COLOUR BIRD ORNAMENT       35131         56932.19
+ 79321                      CHILLI LIGHTS        9844         51478.02
+ 22502         PICNIC BASKET WICKER SMALL        1940         51426.62
+
+02_business_queries.sql, question 2: 10 result rows; showing up to 10
+   sku  units_sold  gross_sales_gbp
+ 23166       77826         81448.21
+ 84077       53680         13462.68
+ 22197       50704         45930.22
+85099B       47369         92113.15
+85123A       37113        104085.75
+ 21212       35960         20752.23
+ 84879       35131         56932.19
+ 23084       26477         57321.97
+ 22492       26341         16744.10
+ 22616       25512          7765.55
+
+02_business_queries.sql, question 3: 10 result rows; showing up to 10
+  sku  units_sold  gross_sales_gbp
+20703           1             4.25
+20860           1             2.10
+21009           1             1.25
+21120           1            16.98
+21160           1             3.36
+21310           1            29.95
+21410           1             8.47
+21414           1             2.10
+21491           1             1.95
+21839           1             5.45
+
+02_business_queries.sql, question 4: 76 result rows; showing up to 10
+   sku  units_sold  orders
+ 23166       77826     233
+ 84077       53680     512
+ 22197       50704    1328
+85099B       47369    2036
+85123A       37113    2195
+ 21212       35960    1286
+ 84879       35131    1408
+ 23084       26477     867
+ 22492       26341     372
+ 22616       25512     492
+
+02_business_queries.sql, question 5: 3 result rows; showing up to 10
+abc_class  sku_count  units_sold  gross_sales_gbp  sales_share_pct
+        A        825     3575750       7726096.26            80.02
+        B        963     1199719       1447032.52            14.99
+        C       2001      488245        482415.85             5.00
+
+02_business_queries.sql, question 6: 12 result rows; showing up to 10
+  month  units_sold  gross_sales_gbp  month_on_month_pct
+2010-12      358743        777865.64                 NaN
+2011-01      387422        671914.94              -13.62
+2011-02      283243        508869.75              -24.27
+2011-03      377071        691132.59               35.82
+2011-04      308509        516194.91              -25.31
+2011-05      395378        741153.76               43.58
+2011-06      388826        738751.87               -0.32
+2011-07      401329        689289.86               -6.70
+2011-08      421439        725493.76                5.25
+2011-09      569945       1030468.78               42.04
+
+02_business_queries.sql, question 7: 1,493 result rows; showing up to 10
+   sku                    description abc_class       scenario_flag         demand_status  on_hand_units  inventory_position_units  safety_stock_units  reorder_point_units  suggested_order_units  days_cover
+ 22423       REGENCY CAKESTAND 3 TIER         A      Reorder review Eligible for baseline            159                        96                 253                  917                   1081         3.0
+85099B        JUMBO BAG RED RETROSPOT         A      Reorder review Eligible for baseline           2399                      2228                1036                 2236                   1636        13.0
+ 23166 MEDIUM CERAMIC TOP STORAGE JAR         A      Reorder review Eligible for baseline             70                        57                 203                  399                    484         4.1
+ 22086 PAPER CHAIN KIT 50'S CHRISTMAS         A Excess cover review Eligible for baseline          17871                     17574                1424                 4552                      0       118.0
+ 23084             RABBIT NIGHT LIGHT         A      Reorder review Eligible for baseline           1190                      2856                2112                 3778                   3461         5.0
+ 84879  ASSORTED COLOUR BIRD ORNAMENT         A Excess cover review Eligible for baseline          14643                     14399                1233                 3796                      0       118.0
+ 79321                  CHILLI LIGHTS         A Excess cover review Eligible for baseline           4746                      4707                 498                 1052                      0       119.0
+ 22197                 POPCORN HOLDER         A      Reorder review Eligible for baseline           1248                      2996                1720                 3468                   2930         5.0
+ 23298                 SPOTTY BUNTING         A      Reorder review Eligible for baseline            132                        80                 329                  882                   1036         3.0
+ 22386        JUMBO BAG PINK POLKADOT         A      Reorder review Eligible for baseline            419                      1005                 581                 1167                    988         5.0
+
+02_business_queries.sql, question 8: 2 result rows; showing up to 10
+transaction_type  transaction_lines  signed_units  signed_transaction_value_gbp
+    cancellation               8340       -188427                    -304386.95
+            sale             502695       5263714                    9655544.63
+
+03_credit_review.sql, question 1: 1,931 result rows; showing up to 10
+   sku       date  units_per_line  unit_price_gbp  positive_lines  negative_lines
+ 23166 2011-01-18           74215            1.04               1               1
+ 21108 2011-04-18            3114            2.10               1               1
+ 22273 2011-10-11             720            2.55               1               1
+ 23284 2011-10-03             200            7.08               2               1
+ 20971 2011-10-11            1296            1.06               1               2
+ 23056 2011-10-24             240            5.39               1               1
+85232B 2010-12-14             240            4.95               1               1
+ 22149 2011-10-11             600            1.85               1               1
+ 22147 2011-10-11             840            1.25               1               1
+ 71477 2011-07-20             360            2.75               1               2
+
+03_credit_review.sql, question 2: 1 result rows; showing up to 10
+  sku  gross_units  credited_units  gross_sales_gbp  signed_transaction_value_gbp
+23166        77826           74494         81448.21                       3968.57

@@ -1,0 +1,56 @@
+{
+  "passed": true,
+  "queries_executed": 10,
+  "queries": [
+    {
+      "file": "02_business_queries.sql",
+      "statement": 1,
+      "result_rows": 10
+    },
+    {
+      "file": "02_business_queries.sql",
+      "statement": 2,
+      "result_rows": 10
+    },
+    {
+      "file": "02_business_queries.sql",
+      "statement": 3,
+      "result_rows": 10
+    },
+    {
+      "file": "02_business_queries.sql",
+      "statement": 4,
+      "result_rows": 76
+    },
+    {
+      "file": "02_business_queries.sql",
+      "statement": 5,
+      "result_rows": 3
+    },
+    {
+      "file": "02_business_queries.sql",
+      "statement": 6,
+      "result_rows": 12
+    },
+    {
+      "file": "02_business_queries.sql",
+      "statement": 7,
+      "result_rows": 1493
+    },
+    {
+      "file": "02_business_queries.sql",
+      "statement": 8,
+      "result_rows": 2
+    },
+    {
+      "file": "03_credit_review.sql",
+      "statement": 1,
+      "result_rows": 1931
+    },
+    {
+      "file": "03_credit_review.sql",
+      "statement": 2,
+      "result_rows": 1
+    }
+  ]
+}

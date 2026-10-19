@@ -1,0 +1,48 @@
+{
+  "source_rows": 541909,
+  "source_columns": [
+    "InvoiceNo",
+    "StockCode",
+    "Description",
+    "Quantity",
+    "InvoiceDate",
+    "UnitPrice",
+    "CustomerID",
+    "Country"
+  ],
+  "source_missing_values": {
+    "InvoiceNo": 0,
+    "StockCode": 0,
+    "Description": 1454,
+    "Quantity": 0,
+    "InvoiceDate": 0,
+    "UnitPrice": 0,
+    "CustomerID": 135080,
+    "Country": 0
+  },
+  "exact_repeat_rows_retained": 5268,
+  "source_min_date": "2010-12-01 08:26:00",
+  "source_max_date": "2011-12-09 12:50:00",
+  "classification_all_dates": {
+    "sale": 527725,
+    "cancellation": 8704,
+    "excluded": 5480
+  },
+  "exclusion_reasons_all_dates": {
+    "included": 536429,
+    "non_merchandise_code": 2963,
+    "nonpositive_or_missing_price": 2517
+  },
+  "rows_outside_analysis_period": 25525,
+  "in_period_excluded_rows": 5333,
+  "in_period_credit_rows_without_positive_sale_sku": 16,
+  "model_rows": 511035,
+  "model_skus": 3789,
+  "duplicate_policy": "Retain exact repeats: the source has no unique invoice-line key.",
+  "customer_id_policy": "Excluded from every model table, export and public report.",
+  "source_zip_sha256": "f5385cbb54bbebf7196389109c6b0621faab0c304e3702548165e71c84aede8b",
+  "source_xlsx_sha256": "43465a06f2ccf7c8b5bd2892bc7defb52f97487934fe93b16ae4c3936424676d",
+  "price_rounding": "Round each unit price to GBP pence, ROUND_HALF_UP, before multiplying by quantity.",
+  "source_prices_with_subpenny_precision": 4,
+  "sales_gbp_if_exact_repeats_removed": 9632333.24
+}

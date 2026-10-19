@@ -1,0 +1,5 @@
+scenario_flag,sku_count,class_a_skus
+Excess cover review,509,192
+Manual review,1845,107
+Reorder review,984,346
+Within scenario policy,451,180

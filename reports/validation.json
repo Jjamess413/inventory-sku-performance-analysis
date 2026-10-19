@@ -1,0 +1,34 @@
+{
+  "checks": {
+    "source_row_reconciliation": true,
+    "foreign_key_integrity": true,
+    "sqlite_integrity": true,
+    "gross_revenue_reconciles_pandas_sql": true,
+    "gross_units_reconcile": true,
+    "one_sku_per_dimension": true,
+    "abc_complete": true,
+    "one_snapshot_per_sku": true,
+    "all_inventory_labelled_synthetic": true,
+    "manual_review_has_no_order_recommendation": true,
+    "concentrated_sales_require_review": true,
+    "eligible_history_is_full_lookback": true,
+    "customer_identifiers_not_exported": true,
+    "twelve_complete_months": true
+  },
+  "passed": true,
+  "runtime": {
+    "python": "3.12.14",
+    "pandas": "2.2.3",
+    "sqlite": "3.53.1"
+  },
+  "analysis_parameters": {
+    "analysis_start": "2010-12-01",
+    "analysis_end": "2011-11-30",
+    "lookback_days": 90,
+    "minimum_active_days": 10,
+    "service_z": 1.645,
+    "order_cycle_days": 7,
+    "excess_cover_days": 90,
+    "lookback_start": "2011-09-02"
+  }
+}

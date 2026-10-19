@@ -1,0 +1,10 @@
+data/raw/*
+data/processed/*
+*.sqlite
+*.sqlite-journal
+__pycache__/
+.venv/
+.DS_Store
+*.pbix
+*.pbit
+# PBIX files need an explicit data and privacy review before publication.
