@@ -32,6 +32,8 @@ See [findings and management actions](reports/findings.md), [credit review](repo
 
 ## Reproduce the analysis
 
+**Windows:** follow the [Windows quick start](docs/WINDOWS_QUICKSTART.md) for installation, PowerShell commands, a first SQL exercise and expected results.
+
 Requires Python 3.11+ and an internet connection for the initial publisher download. Use a virtual environment, activate it for your operating system, then run:
 
 ```bash
