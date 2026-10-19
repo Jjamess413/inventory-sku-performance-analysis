@@ -34,11 +34,14 @@ The initial code and documentation were developed with AI-assisted scaffolding. 
 - [x] Review the owner's duplicate-match thought exercise: two matches for one 10-unit line yield two rows and a sum of 20. This is a teaching scenario.
 - [x] Record the owner's reported zero-row LEFT JOIN missing-product result, consistent with the mentor's model check. Clarify that LEFT JOIN preserves rows; the owner's corrected explanation remains to be reviewed.
 
+- [x] Review the owner's reported CASE threshold outcome: SKU 22086 becomes High volume at a 7,000-unit threshold because its November sales are 7,908. This verifies the threshold reasoning against the mentor reference; independent CASE authorship and condition-order explanation remain unassessed.
+
 ## Next actions
 
 - [ ] Run the 10 business-rule unit tests and saved-query runner on James's Windows environment; review the actual output.
 - [ ] Run and report the duplicate-SKU count query; independently explain matching keys and corrected LEFT JOIN row preservation.
-- [ ] Run the CASE WHEN November volume-band example, modify a threshold and explain first-matching-condition behaviour.
+- [ ] Run the monthly-sales CTE starter, add gross sales inside the CTE and expose that column in the outer query; explain the two row grains.
+- [ ] Revisit CASE first-matching-condition behaviour and progress towards ABC cumulative windows.
 - [ ] Confirm James's local Power BI environment and guide the first import.
 - [ ] Build the star schema and reconcile the first two measures in Desktop.
 - [ ] Complete the three report pages, test interactions and save the actual PBIX.
