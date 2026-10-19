@@ -1,6 +1,6 @@
 # Owner learning log
 
-The owner's aggregation/ranking exercise, modified November WHERE/HAVING query and guided product lookup have been reviewed. The secondary SKU sort and `product_name` column alias are verified. The duplicate-match thought exercise is correct, and the owner reports zero missing product matches. Further join checks, independent explanations, later analytical concepts and Desktop validation remain pending.
+The owner's aggregation/ranking, modified November WHERE/HAVING query and guided product lookup have been reviewed. The secondary SKU sort and product-name alias are verified. The duplicate-match scenario is correct; zero missing matches and the correct CASE threshold outcome are owner-reported. Further join explanations, CTE work, later analytical concepts and Desktop validation remain pending.
 
 ## Guided execution observed: 19 October 2026
 
@@ -108,7 +108,17 @@ This verifies guided JOIN execution and the owner's column-alias modification. T
 
 James reports zero rows for the supplied LEFT JOIN missing-product check, consistent with the mentor's existing validation. This is recorded as an owner-reported result; a new query screenshot was not supplied. He initially described LEFT JOIN as preserving columns. Feedback clarified that it preserves left-side rows at the join step, that SELECT chooses the output columns, and that a later WHERE condition can filter the joined rows. An independent restatement of that correction remains pending.
 
-**Next learning step: CASE WHEN.** A mentor-prepared November volume-band example has been validated against the model. The teaching thresholds are at least 10,000 units for High volume, at least 5,000 for Medium volume, and otherwise Lower volume; conditions are evaluated in that order. These illustrative labels are not the project's revenue-based ABC policy or a stock recommendation. Across all 2,889 November sales SKUs, the reference counts are 2 high, 5 medium and 2,882 lower. The owner's query execution, threshold change and explanation are pending.
+## Exercise 4 review: CASE WHEN threshold change
+
+The mentor's teaching example bands November sales by monthly units: at least 10,000 is High volume, at least 5,000 is Medium volume, and otherwise Lower volume, evaluated in that order. These illustrative labels are separate from the project's revenue-based ABC policy and do not establish an inventory recommendation.
+
+James reports that changing the first threshold to 7,000 changes SKU 22086 to High volume, explaining that its volume is 7,908. This matches the mentor's independently executed reference. A new owner query or screenshot was not supplied, so execution is recorded as owner-reported and the threshold explanation is reviewed as correct. Independent explanation of first-matching-condition behaviour remains to be revisited.
+
+Across all 2,889 November sales SKUs, the mentor reference has 2 high, 5 medium and 2,882 lower at the 10,000-unit threshold; the 7,000-unit variant has 3 high, 4 medium and 2,882 lower.
+
+**Next learning step: a named CTE result.** The mentor has executed a two-stage `monthly_sales` example: aggregate November transactions to one row per SKU, then filter the resulting `units_sold` rows in an outer WHERE. At a minimum of 5,000 units it reproduces the same seven SKU quantities as the earlier HAVING query. The CTE is a named query result scoped to the statement, not a permanent table.
+
+Owner exercise: calculate `gross_sales_gbp` inside the CTE and include that column in the outer SELECT, keeping the seven-row cohort. The mentor reference for this extension has been executed; owner SQL and explanation remain pending.
 
 ## Exercise review
 
@@ -118,7 +128,8 @@ James reports zero rows for the supplied LEFT JOIN missing-product check, consis
 | November SKU query: WHERE and HAVING | Modified mentor scaffold; seven rows verified at a 5,000-unit threshold; line-level quantity explanation reviewed | Reviewed at basic exercise level |
 | Product-lookup INNER JOIN and column alias | Seven named SKU rows reconcile; owner applied `AS product_name` correctly | Execution and modification reviewed |
 | Join grain and duplicate/missing keys | Duplicate-match scenario correct; owner reports zero missing matches; duplicate-count output and corrected row-preservation explanation pending | Partly reviewed |
-| CASE WHEN volume bands | Mentor example validated; owner execution and threshold exercise pending | Pending |
+| CASE WHEN volume bands | Owner reports SKU 22086 becomes High volume at 7,000 units because it sold 7,908; matches reference | Threshold reasoning reviewed; condition-order explanation to revisit |
+| CTE monthly-sales result | Mentor starter and monetary extension validated; owner extension pending | Pending |
 | ABC cumulative window | Pending | Pending |
 | Zero-sale days and inventory assumptions | Pending | Pending |
 | Power BI relationships and DAX | Pending | Pending |
