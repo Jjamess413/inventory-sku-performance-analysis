@@ -24,12 +24,14 @@ The initial code and documentation were developed with AI-assisted scaffolding. 
 - [x] Record actual findings, review candidates, assumptions and validation evidence.
 - [x] Prepare Power Query starters, DAX and the Desktop build/reconciliation guide.
 - [x] James extracts the project ZIP, creates a local Python environment and completes the first Windows build. The owner-provided terminal screenshot shows Python 3.13.16, pandas 3.0.6, PASS on 14 pipeline checks, 511,035 model rows and 3,789 model SKUs. Windows unit tests and saved-query runner output remain to be reviewed.
-- [x] James opens the generated database in DB Browser for SQLite and executes the supplied top-five sales query. All five rows in the owner-provided result screenshot match the reference results. This confirms guided execution; independently modified SQL and an explanation are still pending.
+- [x] James opens the generated database in DB Browser for SQLite and executes the supplied top-five sales query. All five rows in the owner-provided result screenshot match the reference results. This confirms guided execution; the subsequent modified-query review is recorded below.
+
+- [x] Review James's first modified SQL submission and grouping explanation. The ten-row descending-volume result matches the reference; a secondary SKU sort was requested and is pending owner verification.
 
 ## Next actions
 
 - [ ] Run the 10 business-rule unit tests and saved-query runner on James's Windows environment; review the actual output.
-- [ ] James modifies the starter query to rank the ten highest-volume SKUs and explains `GROUP BY sku`.
+- [ ] Apply and verify the requested secondary SKU sort in the owner's first exercise.
 - [ ] James runs and explains the November SQL exercise in `learning_exercises.md`.
 - [ ] Review the answer and update the learning log with actual feedback.
 - [ ] Confirm James's local Power BI environment and guide the first import.
