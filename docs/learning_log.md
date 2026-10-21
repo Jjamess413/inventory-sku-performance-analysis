@@ -1,6 +1,6 @@
 # Owner learning log
 
-The owner's aggregation/ranking, modified November WHERE/HAVING query and guided product lookup have been reviewed. The secondary SKU sort and product-name alias are verified. The duplicate-match scenario is correct; zero missing matches and the correct CASE threshold outcome are owner-reported. Further join explanations, CTE work, later analytical concepts and Desktop validation remain pending.
+The original entries below preserve the learning sequence. Subsequent guided CTE, cumulative ABC and monthly-growth work was reviewed in the 19–20 October conversation. James requested delivery first on 21 October and deferred further learning. No independent-from-scratch authorship or unobserved Desktop work is inferred from generated code. See the latest dated entry at the end of this file.
 
 ## Guided execution observed: 19 October 2026
 
@@ -129,9 +129,24 @@ Owner exercise: calculate `gross_sales_gbp` inside the CTE and include that colu
 | Product-lookup INNER JOIN and column alias | Seven named SKU rows reconcile; owner applied `AS product_name` correctly | Execution and modification reviewed |
 | Join grain and duplicate/missing keys | Duplicate-match scenario correct; owner reports zero missing matches; duplicate-count output and corrected row-preservation explanation pending | Partly reviewed |
 | CASE WHEN volume bands | Owner reports SKU 22086 becomes High volume at 7,000 units because it sold 7,908; matches reference | Threshold reasoning reviewed; condition-order explanation to revisit |
-| CTE monthly-sales result | Mentor starter and monetary extension validated; owner extension pending | Pending |
-| ABC cumulative window | Pending | Pending |
+| CTE monthly-sales result | Guided monetary extension and later monthly comparisons reviewed in the subsequent conversation | Guided work reviewed; independent explanation to continue |
+| ABC cumulative window | November class counts, share formulas and combined five-column output reviewed in owner screenshots | Guided work reviewed; boundary policy clarified below |
 | Zero-sale days and inventory assumptions | Pending | Pending |
 | Power BI relationships and DAX | Pending | Pending |
 
 Replace pending entries with James's actual work and the review outcome. Do not mark an item complete because a scaffold was generated.
+
+## Subsequent guided work and delivery priority: 21 October 2026
+
+The visible 19–20 October continuation contains the following reviewed work:
+
+- The owner correctly predicted that LIMIT does not change the earlier window total; reported 2.37% for the leading November SKU and 11.31% cumulative share for the top ten.
+- The owner initially reversed ABC interpretation, accepted the correction, then supplied the successful November five-column summary: A 615, B 725, C 1,549; sales shares 79.98%, 15.02%, 5.01%. The screenshot amounts sum to £1,457,742.24 and the counts to 2,889.
+- The owner corrected an extra aggregation layer in the SKU-share expression after feedback; the combined result screenshot shows the corrected expressions.
+- The owner supplied October sales £1,106,666.53 and explained November's 31.72% month-on-month growth correctly.
+- The owner correctly identified that October has no earlier row within the filtered LAG input and placed the November-only display filter outside the comparison CTE.
+- The quantity extension included SUM(quantity) and LAG(units_sold); passing units_sold through the second CTE and adapting the growth expression still required guidance. The delivery pipeline's 20.64% quantity growth is analyst-verified, not an owner-reported independent answer.
+
+**ABC scope/boundary clarification:** the November exercise classified the current item's end cumulative share at <=80/<=95. The released model uses twelve complete months and retains the threshold-crossing item in the higher-priority class, based on the cumulative share before that item. Its 825/963/2,001 counts are deliberately different in both scope and boundary policy. Browser and native report filters keep this full-period classification fixed.
+
+**Owner priority:** complete the project today; learning can follow. Further quizzes, independent walkthroughs and lessons are therefore postponed rather than used as a delivery gate. The source implementation remains openly AI-assisted. Native Windows execution is still an actual acceptance requirement and has not been invented.

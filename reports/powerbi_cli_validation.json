@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "tool": "@microsoft/powerbi-report-authoring-cli",
+  "tool_version": "0.5.0",
+  "scope": "Offline project conformance; public schema and CSV checks are recorded separately. Desktop rendering is not executed.",
+  "result": "succeeded",
+  "error_count": 0,
+  "warning_count": 0
+}

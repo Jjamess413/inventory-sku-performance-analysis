@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="James You — retail sales, SKU prioritisation and a transparent inventory review scenario.">
+<title>Inventory & SKU Performance | James You</title>
+<style>
+:root{--navy:#102235;--ink:#182b3d;--muted:#627486;--teal:#087e78;--mint:#e4f3ef;--line:#dce5eb;--bg:#f3f6f8;--amber:#946416;--gold:#c7933d;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 "Segoe UI",Arial,sans-serif}button,input,select{font:inherit}button,select{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #18b3a8;outline-offset:3px}
+.shell{max-width:1480px;margin:auto;padding:24px 32px 32px}.masthead{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}.wordmark{font-weight:800;letter-spacing:1.5px;font-size:13px}.wordmark b{display:inline-grid;place-items:center;background:var(--navy);color:#fff;width:34px;height:34px;border-radius:9px;margin-right:10px;font-size:17px}.author{color:var(--muted);font-size:12px}.author a{color:var(--ink);text-decoration:none}
+.hero{background:var(--navy);color:white;padding:26px 30px;border-radius:14px;display:flex;align-items:center;justify-content:space-between;gap:24px}.eyebrow{text-transform:uppercase;letter-spacing:2px;font-size:10px;font-weight:700;color:#83c7c0;margin-bottom:8px}h1{font-size:29px;letter-spacing:-.7px;line-height:1.15;margin:0 0 9px;font-weight:650}.hero p{margin:0;color:#c0cfda;font-size:13px}.scope{min-width:214px;border-left:1px solid #405063;padding-left:24px;font-size:12px;color:#c0cfda}.scope strong{display:block;color:white;font-size:14px;margin:4px 0}.status-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#53c5b2;margin-right:6px}
+nav{display:flex;gap:8px;margin:20px 0 18px;border-bottom:1px solid var(--line)}nav button{border:0;background:transparent;color:var(--muted);font-weight:600;padding:11px 16px 13px;border-bottom:3px solid transparent}nav button[aria-selected="true"]{color:var(--teal);border-bottom-color:var(--teal)}.toolbar{display:flex;align-items:end;gap:14px;margin-bottom:18px;flex-wrap:wrap}.control{display:flex;flex-direction:column;gap:5px}.control label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:700}select,input{background:#fff;border:1px solid #cdd9e1;border-radius:6px;color:var(--ink);padding:8px 11px;min-height:38px}input{min-width:255px}.toolbar .push{margin-left:auto}.button{border:1px solid #cdd9e1;background:#fff;border-radius:6px;padding:8px 13px;color:var(--ink);font-weight:600;min-height:38px}.button.primary{background:var(--teal);color:white;border-color:var(--teal)}.quiet{font-size:12px;color:var(--muted)}.pill{display:inline-flex;align-items:center;padding:3px 8px;border-radius:20px;background:var(--mint);color:var(--teal);font-size:10px;font-weight:700;letter-spacing:.4px}.pill.amber{background:#fff0d5;color:#8f5c0a}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:18px}.kpi{background:#fff;border:1px solid var(--line);border-radius:10px;padding:17px 20px;position:relative}.kpi:before{content:"";position:absolute;left:0;top:18px;height:31px;width:3px;background:var(--teal);border-radius:3px}.kpi-label{font-size:11px;color:var(--muted);font-weight:600}.kpi-value{font-size:31px;font-weight:650;letter-spacing:-1.1px;line-height:1.2;margin:7px 0}.kpi-foot{font-size:11px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:18px;margin-bottom:18px}.grid.equal{grid-template-columns:1.15fr 1fr}.panel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:19px 22px;min-width:0}.panel h2{font-size:14px;margin:0 0 3px;font-weight:650}.sub{font-size:11px;color:var(--muted);margin:0 0 14px}.panel-top{display:flex;align-items:start;justify-content:space-between;gap:10px}.chart{width:100%;display:block}.chart text{font-family:"Segoe UI",Arial,sans-serif;fill:#738595;font-size:10px}.chart .gridline{stroke:#e6edf1;stroke-width:1}.abc-row{margin:16px 0}.abc-head{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px}.abc-head strong{font-weight:650}.track{height:9px;background:#edf2f5;border-radius:4px;overflow:hidden;margin-bottom:4px}.fill{height:100%;border-radius:4px}.mini-legend{display:flex;gap:14px;font-size:10px;color:var(--muted);margin:11px 0}.legend-dot{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:5px}.insight{background:#eff7f5;border:1px solid #cde7df;border-radius:8px;padding:13px 14px;color:#245c54;font-size:12px}.bars{display:flex;flex-direction:column;gap:9px;margin-top:13px}.bar-row{display:grid;grid-template-columns:185px 1fr 76px;gap:12px;align-items:center;font-size:11px}.bar-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bar-name small{font-size:10px;color:var(--muted)}.bar-track{height:12px;background:#eef3f5;border-radius:3px;overflow:hidden}.bar-fill{height:100%;background:var(--teal);border-radius:3px}.bar-value{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.callout{border-left:3px solid var(--gold);padding:0 0 0 13px;margin:17px 0}.callout strong{font-size:13px}.callout p{margin:5px 0 0;color:var(--muted);font-size:12px}.action{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #edf1f4}.action:last-child{border-bottom:0}.action-num{flex:0 0 23px;width:23px;height:23px;border-radius:50%;background:#edf5f3;color:var(--teal);display:grid;place-items:center;font-size:11px;font-weight:700}.action p{margin:2px 0;color:var(--muted);font-size:11px}.action strong{font-size:12px}.banner{background:#fff5e4;border:1px solid #ead4ab;color:#795112;border-radius:9px;padding:13px 17px;margin-bottom:18px;font-size:12px}.banner strong{display:block;font-size:13px;margin-bottom:3px}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;white-space:nowrap;font-size:12px}th{background:#f5f8fa;color:#667d90;text-transform:uppercase;letter-spacing:.6px;font-size:9px;font-weight:700;text-align:left;padding:11px 12px;border-bottom:1px solid var(--line)}td{padding:11px 12px;border-bottom:1px solid #edf1f4;vertical-align:middle}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}td.name{max-width:330px;overflow:hidden;text-overflow:ellipsis}tbody tr:hover{background:#f1f8f6}.class-tag{display:inline-block;min-width:23px;text-align:center;border-radius:4px;font-weight:700;padding:2px 5px;font-size:10px}.class-A{background:#dcefe9;color:#0b715e}.class-B{background:#e5edf7;color:#446791}.class-C{background:#edf0f3;color:#677583}.flag{font-size:10px;font-weight:600;white-space:nowrap}.flag.reorder{color:#0b7c6e}.flag.excess{color:#986a17}.flag.manual{color:#845e91}.flag.within{color:#657c8c}.pager{display:flex;align-items:center;gap:9px;margin-top:15px;font-size:11px;color:var(--muted)}.pager span{margin-right:auto}.empty{padding:40px;text-align:center;color:var(--muted)}.method-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.method-grid p,.method-grid li{font-size:12px;color:var(--muted)}.method-grid ul{padding-left:18px}.method-grid a{color:var(--teal)}.code{background:#eff3f6;padding:13px;border-radius:7px;white-space:pre-wrap;font:11px/1.8 Consolas,monospace}.footer{display:flex;justify-content:space-between;gap:15px;color:var(--muted);font-size:10px;border-top:1px solid var(--line);padding-top:18px;margin-top:22px}.footer a{color:var(--muted)}[hidden]{display:none!important}.overlay{position:fixed;inset:0;background:#10223588;display:flex;align-items:center;justify-content:center;z-index:5;padding:25px}.dialog{background:white;padding:26px;max-width:660px;width:100%;border-radius:14px;box-shadow:0 20px 80px #10223540;max-height:90vh;overflow:auto}.dialog h2{margin:0 0 5px;font-size:20px}.dialog .close{float:right}.detail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:20px 0}.detail-grid div{background:var(--bg);padding:12px;border-radius:6px}.detail-grid small{display:block;color:var(--muted);font-size:10px}.detail-grid strong{font-size:18px}.scenario-row{cursor:pointer}.section-title{font-size:20px;font-weight:650;margin:0 0 4px}
+@media(max-width:1000px){.shell{padding:18px}.kpis{grid-template-columns:repeat(2,1fr)}.grid,.grid.equal{grid-template-columns:1fr}.hero{align-items:start}.scope{min-width:170px}.bar-row{grid-template-columns:185px 1fr 70px}}
+@media(max-width:650px){.hero{display:block;padding:22px}h1{font-size:24px}.scope{border:0;padding:15px 0 0}.masthead{align-items:start}.author{text-align:right;max-width:125px}nav{overflow:auto}nav button{white-space:nowrap;padding:9px}.kpis{gap:9px}.kpi{padding:14px}.kpi-value{font-size:25px}.toolbar .push{margin-left:0}.panel{padding:15px}.method-grid{grid-template-columns:1fr}.bar-row{grid-template-columns:130px 1fr 65px;gap:7px}.footer{display:block}.footer span{display:block;margin:5px 0}.detail-grid{grid-template-columns:repeat(2,1fr)}}
+@media print{nav,.toolbar,.button,.pager{display:none}.shell{max-width:none;padding:0}.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}.panel,.kpi{break-inside:avoid}.grid{gap:12px}.footer{font-size:8px}}
+</style>
+</head>
+<body>
+<div class="shell">
+ <header class="masthead"><div class="wordmark"><b>JY</b> ANALYTICS PORTFOLIO</div><div class="author"><strong>James You</strong> · Sydney<br>SQL · Python · Power BI source</div></header>
+ <section class="hero"><div><div class="eyebrow">Retail operations · Public data case study</div><h1>Inventory & SKU Performance</h1><p>Find the commercial core. Investigate unusual demand. Build a transparent stock review queue.</p></div><div class="scope"><span class="status-dot"></span>Historical sales analysis<strong>Dec 2010 — Nov 2011</strong>All included countries · GBP<br>Stock scenario: 30 Nov 2011</div></section>
+ <nav role="tablist" aria-label="Dashboard pages">
+  <button role="tab" aria-selected="true" data-page="overview">01 Executive overview</button>
+  <button role="tab" aria-selected="false" data-page="sku">02 SKU explorer</button>
+  <button role="tab" aria-selected="false" data-page="scenario">03 Stock review scenario</button>
+  <button role="tab" aria-selected="false" data-page="method">Method & evidence</button>
+ </nav>
+ <div class="toolbar" id="historicalFilters">
+  <div class="control"><label for="monthFilter">Sales period</label><select id="monthFilter"></select></div>
+  <div class="control"><label for="countryFilter">Customer country</label><select id="countryFilter"></select></div>
+  <span class="quiet">ABC classes remain fixed to full-period gross sales.</span>
+  <button class="button push" id="resetFilters">Reset filters</button>
+ </div>
+ <main>
+ <section id="page-overview" role="tabpanel">
+  <div class="kpis" id="overviewKpis"></div>
+  <div class="grid">
+   <article class="panel"><div class="panel-top"><div><h2>Sales across twelve complete months</h2><p class="sub" id="trendSub">Historical gross merchandise sales · GBP</p></div><span class="pill" id="novGrowth"></span></div><div id="trendChart"></div></article>
+   <article class="panel"><h2>ABC: where the sales concentrate</h2><p class="sub">Fixed full-period classes · contribution in current selection</p><div class="mini-legend"><span><i class="legend-dot" style="background:#087e78"></i>Sales share</span><span><i class="legend-dot" style="background:#a9bdca"></i>Active SKU share</span></div><div id="abcChart"></div><div class="insight" id="abcInsight"></div></article>
+  </div>
+  <div class="grid equal">
+   <article class="panel"><div class="panel-top"><div><h2>Top 10 SKUs by gross sales</h2><p class="sub">Ranking recalculates for the selected sales period and country</p></div><button class="button" id="exploreSkus">Explore SKUs</button></div><div class="bars" id="topSkus"></div></article>
+   <article class="panel"><h2>What to investigate next</h2><p class="sub">Proposed actions from the full-period analysis</p><div class="callout"><strong>Check the volume leader before ordering</strong><p>SKU 23166 includes equal-and-opposite 74,215-unit entries on 18 Jan 2011. This is an offset candidate, not confirmed recurring demand.</p></div><div class="action"><span class="action-num">1</span><div><strong>Start with A-class product records</strong><p>Validate observed stock, supplier receipts and availability before adjusting orders.</p></div></div><div class="action"><span class="action-num">2</span><div><strong>Separate gross sales from credits</strong><p id="creditEvidence"></p></div></div><div class="action"><span class="action-num">3</span><div><strong>Use the scenario as a review queue</strong><p>984 reorder-review and 509 excess-cover candidates under assumed stock inputs; no realised savings claimed.</p></div></div></article>
+  </div>
+ </section>
+ <section id="page-sku" role="tabpanel" hidden>
+  <div class="toolbar"><div class="control"><label for="skuSearch">Search SKU or product</label><input id="skuSearch" placeholder="Try 22423, rabbit or cake"></div><div class="control"><label for="skuAbc">ABC class</label><select id="skuAbc"><option value="all">All classes</option><option>A</option><option>B</option><option>C</option></select></div><div class="control"><label for="skuSort">Sort by</label><select id="skuSort"><option value="sales">Gross sales</option><option value="units">Gross units</option><option value="credits">Credit value</option></select></div><button class="button push" id="exportSkus">Export filtered CSV</button></div>
+  <article class="panel"><div class="panel-top"><div><h2>Product performance</h2><p class="sub" id="skuSummary"></p></div><span class="pill">Observed order transactions</span></div><div class="table-wrap"><table><thead><tr><th>SKU</th><th>Product</th><th>ABC</th><th class="num">Gross units</th><th class="num">Gross sales · GBP</th><th class="num">Credits · GBP</th><th class="num">Signed value · GBP</th></tr></thead><tbody id="skuRows"></tbody></table></div><div class="pager"><span id="skuPageInfo"></span><button class="button" id="skuPrev">Previous</button><button class="button" id="skuNext">Next</button></div></article>
+ </section>
+ <section id="page-scenario" role="tabpanel" hidden>
+  <div class="banner"><strong>ILLUSTRATIVE STOCK SCENARIO — NOT OBSERVED INVENTORY</strong>All on-hand, on-order, reserved balances and supplier lead times are synthetic. Fixed snapshot: 30 November 2011. Sales lookback: 90 calendar days. Manual-review products have no automatic order recommendation.</div>
+  <div class="toolbar"><div class="control"><label for="scenarioSearch">Search SKU or product</label><input id="scenarioSearch" placeholder="Search the review queue"></div><div class="control"><label for="scenarioAbc">ABC class</label><select id="scenarioAbc"><option value="all">All classes</option><option>A</option><option>B</option><option>C</option></select></div><div class="control"><label for="scenarioStatus">Review status</label><select id="scenarioStatus"><option value="all">All statuses</option><option>Reorder review</option><option>Excess cover review</option><option>Manual review</option><option>Within scenario policy</option></select></div><button class="button push" id="exportScenario">Export filtered queue</button></div>
+  <div class="kpis" id="scenarioKpis"></div>
+  <article class="panel"><div class="panel-top"><div><h2>Stock policy review queue</h2><p class="sub">Select a product to inspect the assumptions behind its flag.</p></div><span class="pill amber">Synthetic inputs</span></div><div class="table-wrap"><table><thead><tr><th>SKU</th><th>Product</th><th>ABC</th><th>Review status</th><th class="num">On hand</th><th class="num">Position</th><th class="num">Reorder point</th><th class="num">Suggested units</th><th class="num">Days cover</th></tr></thead><tbody id="scenarioRows"></tbody></table></div><div class="pager"><span id="scenarioPageInfo"></span><button class="button" id="scenarioPrev">Previous</button><button class="button" id="scenarioNext">Next</button></div></article>
+ </section>
+ <section id="page-method" role="tabpanel" hidden>
+  <div class="method-grid">
+   <article class="panel"><h2>Source & scope</h2><p>Public transactions from a UK-based online retailer, across all included customer countries. Analysis uses twelve complete months, 1 Dec 2010–30 Nov 2011. The source's final partial December is excluded.</p><p><a href="https://archive.ics.uci.edu/dataset/352/online+retail" target="_blank" rel="noopener">UCI Online Retail</a> · Chen, D. (2015) · <a href="https://doi.org/10.24432/C5BW33" target="_blank" rel="noopener">DOI: 10.24432/C5BW33</a> · CC BY 4.0.</p><p>Each browser data row is a SKU × calendar month × country aggregate. No customer IDs, personal contact details or original invoice lines are embedded in this dashboard.</p><p>Prepared by James You with AI-assisted development. Guided SQL practice and source decisions are recorded in the repository. This case study uses no private employer data.</p></article>
+   <article class="panel"><h2>What the metrics mean</h2><ul><li>Gross sales: included positive, priced merchandise entries before credits.</li><li>Orders: distinct positive-sale invoices, not invoice-line counts.</li><li>Signed value: gross sales less included credits; not profit or recognised accounting revenue.</li><li>ABC: full-period sales contribution, with the threshold-crossing SKU kept in the higher-priority class.</li><li>Original repeated rows remain flagged and retained because there is no unique source invoice-line key.</li></ul><p>Observed stockouts, margins, financial inventory turnover and realised savings cannot be measured from these fields.</p></article>
+   <article class="panel"><h2>Reproduce the results</h2><pre class="code">python -m pip install -r requirements.txt
+python scripts/build.py
+python -m unittest discover -s tests -v
+python scripts/run_queries.py
+python scripts/build_dashboard.py
+python scripts/build_powerbi.py</pre><p>The pipeline verifies the publisher workbook checksum, reconciles monetary totals and preserves credits. Dashboard build checks reconcile its aggregates with the validated model.</p></article>
+   <article class="panel"><h2>Power BI delivery status</h2><p>The accompanying native Power BI project contains an import model, relationships, DAX measures and three report pages. Open the included OPEN_POWERBI.cmd launcher, refresh in Desktop and compare the control totals.</p><p><strong>This browser dashboard is a standalone report, not an embedded Power BI report.</strong> Its screenshots are labelled accordingly. An owner-provided Windows Desktop screenshot on 21 October 2026 confirms the native executive overview after refresh and four matching control totals. Other native pages and slicer behaviour remain to be reviewed.</p><p>The scenario remains fixed when historical dates/countries change; its page deliberately provides only product/class/status controls.</p><p><a href="https://github.com/Jjamess413/inventory-sku-performance-analysis" target="_blank" rel="noopener">View source code, SQL, definitions and validation evidence on GitHub</a></p></article>
+  </div>
+ </section>
+ </main>
+ <footer class="footer"><span>James You · Portfolio case study · GBP · Historical public sales + separately labelled synthetic stock</span><span><a href="https://github.com/Jjamess413/inventory-sku-performance-analysis" target="_blank" rel="noopener">Source & validation</a> · UCI Online Retail · CC BY 4.0</span></footer>
+</div>
+<div class="overlay" id="detailOverlay" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="detailTitle"><button class="button close" id="closeDetail">Close</button><span class="pill amber">Synthetic stock scenario</span><h2 id="detailTitle"></h2><p class="sub" id="detailSubtitle"></p><div class="detail-grid" id="detailNumbers"></div><div class="banner" id="detailReason"></div><p class="quiet">Validate actual stock, supplier lead times, availability and order constraints before any purchasing decision.</p></div></div>
+<script id="portfolio-data" type="application/json">__PORTFOLIO_DATA__</script>
+<script>
+"use strict";
+const D=JSON.parse(document.getElementById("portfolio-data").textContent);
+const C=D.catalog, S=D.scenario, F=D.facts, M=D.months, N=D.countries;
+const state={tab:"overview",month:"all",country:"all",abc:"all",q:"",sort:"sales",page:0,scenarioAbc:"all",scenarioStatus:"all",scenarioQ:"",scenarioPage:0};
+const $=id=>document.getElementById(id), num=v=>v==null?"—":Number(v).toLocaleString("en-GB"), cash=v=>"£"+Number(v).toLocaleString("en-GB",{minimumFractionDigits:2,maximumFractionDigits:2}), pct=v=>Number(v).toFixed(2)+"%";
+const compact=v=>v>=1e6?(v/1e6).toFixed(2)+"m":v>=1e3?(v/1e3).toFixed(1)+"k":num(v);
+const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const monthName=m=>new Date(m+"-01T12:00:00Z").toLocaleDateString("en-GB",{month:"short",year:"numeric",timeZone:"UTC"});
+const tag=a=>'<span class="class-tag class-'+a+'">'+a+"</span>";
+const selected=(r,withMonth=true)=>(!withMonth||state.month==="all"||r[1]===+state.month)&&(state.country==="all"||r[2]===+state.country);
+let cacheKey="",cache=null, skuFiltered=[],scenarioFiltered=[],previousFocus=null;
+function overview(){
+ const key=state.month+"|"+state.country;
+ if(cache&&key===cacheKey)return cache;
+ const products=new Map(),trend=M.map(()=>0);
+ for(const r of F){
+  if(selected(r,false))trend[r[1]]+=r[4];
+  if(!selected(r))continue;
+  if(!products.has(r[0]))products.set(r[0],[0,0,0,0]);
+  const v=products.get(r[0]);for(let i=0;i<4;i++)v[i]+=r[i+3];
+ }
+ const abc={A:{count:0,sales:0},B:{count:0,sales:0},C:{count:0,sales:0}};
+ let sales=0,units=0,credits=0,active=0;
+ for(const [id,v] of products){sales+=v[1];units+=v[0];credits+=v[2];abc[C[id][4]].sales+=v[1];if(v[0]>0){active++;abc[C[id][4]].count++;}}
+ let orders=0;for(const r of D.orders)if((state.month==="all"||r[0]===+state.month)&&(state.country==="all"||r[1]===+state.country))orders+=r[2];
+ cacheKey=key;cache={products,trend,abc,sales,units,credits,active,orders};return cache;
+}
+function card(label,value,foot,key,raw){return '<div class="kpi"><div class="kpi-label">'+label+'</div><div class="kpi-value"'+(key?' data-kpi="'+key+'" data-value="'+raw+'"':"")+'>'+value+'</div><div class="kpi-foot">'+foot+"</div></div>";}
+function renderOverview(){
+ const o=overview();
+ $("overviewKpis").innerHTML=card("GROSS MERCHANDISE SALES","£"+compact(o.sales/100),cash(o.sales/100)+" · before credits","sales",o.sales/100)+card("GROSS UNITS",compact(o.units),num(o.units)+" ordered units","units",o.units)+card("SALES ORDERS",num(o.orders),"Distinct positive-sale invoices","orders",o.orders)+card("ACTIVE SKUs",num(o.active),"Products with positive sales","skus",o.active);
+ const max=Math.max(...o.trend,1), W=760,H=218,left=56,right=24,top=12,bottom=33,iw=W-left-right,ih=H-top-bottom;
+ let svg='<svg class="chart" viewBox="0 0 '+W+" "+H+'" role="img" aria-label="Monthly gross merchandise sales">';
+ for(let i=0;i<=3;i++){const y=top+ih-i*ih/3;svg+='<line class="gridline" x1="'+left+'" x2="'+(W-right)+'" y1="'+y+'" y2="'+y+'"/><text x="'+(left-10)+'" y="'+(y+3)+'" text-anchor="end">£'+compact(max/100*i/3)+"</text>";}
+ const points=o.trend.map((v,i)=>[left+i*iw/11,top+ih-v/max*ih]);
+ const path=points.map((p,i)=>(i?"L":"M")+p[0]+","+p[1]).join(" ");
+ svg+='<path d="'+path+" L"+points[11][0]+","+(top+ih)+" L"+left+","+(top+ih)+' Z" fill="#e0f0eb"/><path d="'+path+'" fill="none" stroke="#087e78" stroke-width="2.8"/>';
+ points.forEach((p,i)=>{svg+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+(state.month===String(i)?5:3)+'" fill="#087e78"><title>'+monthName(M[i])+": "+cash(o.trend[i]/100)+'</title></circle><text x="'+p[0]+'" y="'+(H-8)+'" text-anchor="middle">'+new Date(M[i]+"-01T12:00:00Z").toLocaleDateString("en-GB",{month:"short",timeZone:"UTC"})+"</text>";});
+ $("trendChart").innerHTML=svg+"</svg>";
+ $("trendSub").textContent="GBP · full twelve-month context · "+(state.country==="all"?"all included countries":N[+state.country]);
+ const growth=o.trend[10]?100*(o.trend[11]-o.trend[10])/o.trend[10]:null;
+ $("novGrowth").textContent=growth==null?"Nov MoM unavailable":(growth>=0?"+":"")+growth.toFixed(2)+"% Nov MoM";
+ $("abcChart").innerHTML=["A","B","C"].map(a=>{const v=o.abc[a],sp=o.sales?100*v.sales/o.sales:0,kp=o.active?100*v.count/o.active:0;return '<div class="abc-row"><div class="abc-head"><strong>Class '+a+'</strong><span>'+num(v.count)+" SKUs · "+pct(sp)+' sales</span></div><div class="track"><div class="fill" style="width:'+sp+'%;background:#087e78"></div></div><div class="track"><div class="fill" style="width:'+kp+'%;background:#a9bdca"></div></div></div>';}).join("");
+ $("abcInsight").textContent=o.sales?pct(100*o.abc.A.count/(o.active||1))+" of active SKUs contribute "+pct(100*o.abc.A.sales/o.sales)+" of selected gross sales.":"No positive sales in this selection.";
+ const ranked=[...o.products].filter(x=>x[1][1]>0).sort((a,b)=>b[1][1]-a[1][1]||C[a[0]][0].localeCompare(C[b[0]][0])).slice(0,10), barMax=ranked.length?ranked[0][1][1]:1;
+ $("topSkus").innerHTML=ranked.map(([id,v])=>'<div class="bar-row"><div class="bar-name" title="'+esc(C[id][1])+'"><small>'+esc(C[id][0])+'</small> '+esc(C[id][1])+'</div><div class="bar-track"><div class="bar-fill" style="width:'+(100*v[1]/barMax)+'%"></div></div><div class="bar-value">£'+compact(v[1]/100)+"</div></div>").join("")||'<div class="empty">No sales for this selection.</div>';
+ $("creditEvidence").textContent=cash(o.credits/100)+" of credit value in the current selection. Gross sales are not profit or cash receipts.";
+}
+function renderSkus(){
+ const o=overview(), q=state.q.toLowerCase();
+ skuFiltered=[...o.products].filter(([id])=>(state.abc==="all"||C[id][4]===state.abc)&&(!q||(C[id][0]+" "+C[id][1]).toLowerCase().includes(q)));
+ const ix=state.sort==="units"?0:state.sort==="credits"?2:1;
+ skuFiltered.sort((a,b)=>b[1][ix]-a[1][ix]||C[a[0]][0].localeCompare(C[b[0]][0]));
+ const pages=Math.max(1,Math.ceil(skuFiltered.length/25));state.page=Math.min(state.page,pages-1);
+ $("skuSummary").textContent=num(skuFiltered.length)+" SKUs in filtered transactions · "+(state.month==="all"?"twelve complete months":monthName(M[+state.month]))+" · "+(state.country==="all"?"all included countries":N[+state.country]);
+ $("skuRows").innerHTML=skuFiltered.slice(state.page*25,state.page*25+25).map(([id,v])=>'<tr><td>'+esc(C[id][0])+'</td><td class="name" title="'+esc(C[id][1])+'">'+esc(C[id][1])+"</td><td>"+tag(C[id][4])+'</td><td class="num">'+num(v[0])+'</td><td class="num">'+cash(v[1]/100)+'</td><td class="num">'+cash(v[2]/100)+'</td><td class="num">'+cash((v[1]-v[2])/100)+"</td></tr>").join("")||'<tr><td colspan="7" class="empty">No matching products. Try another search or reset the filters.</td></tr>';
+ $("skuPageInfo").textContent="Page "+(state.page+1)+" of "+pages+" · 25 rows per page";
+ $("skuPrev").disabled=state.page===0;$("skuNext").disabled=state.page>=pages-1;
+}
+function flagClass(f){return f==="Reorder review"?"reorder":f==="Excess cover review"?"excess":f==="Manual review"?"manual":"within";}
+function scenarioRows(){
+ const q=state.scenarioQ.toLowerCase();
+ return S.filter(r=>(state.scenarioAbc==="all"||C[r[0]][4]===state.scenarioAbc)&&(state.scenarioStatus==="all"||r[1]===state.scenarioStatus)&&(!q||(C[r[0]][0]+" "+C[r[0]][1]).toLowerCase().includes(q))).sort((a,b)=>C[a[0]][5]-C[b[0]][5]);
+}
+function renderScenario(){
+ scenarioFiltered=scenarioRows();
+ const flags=["Reorder review","Excess cover review","Manual review","Within scenario policy"];
+ $("scenarioKpis").innerHTML=flags.map(f=>card(f.toUpperCase(),num(scenarioFiltered.filter(r=>r[1]===f).length),"Synthetic stock inputs · SKU count")).join("");
+ const pages=Math.max(1,Math.ceil(scenarioFiltered.length/25));state.scenarioPage=Math.min(state.scenarioPage,pages-1);
+ $("scenarioRows").innerHTML=scenarioFiltered.slice(state.scenarioPage*25,state.scenarioPage*25+25).map(r=>'<tr class="scenario-row" tabindex="0" role="button" data-sku-index="'+r[0]+'" aria-label="Inspect scenario for '+esc(C[r[0]][0])+'"><td>'+esc(C[r[0]][0])+'</td><td class="name" title="'+esc(C[r[0]][1])+'">'+esc(C[r[0]][1])+"</td><td>"+tag(C[r[0]][4])+'</td><td><span class="flag '+flagClass(r[1])+'">'+esc(r[1])+'</span></td><td class="num">'+num(r[3])+'</td><td class="num">'+num(r[7])+'</td><td class="num">'+num(r[11])+'</td><td class="num">'+num(r[13])+'</td><td class="num">'+(r[14]==null?"—":r[14].toFixed(1))+"</td></tr>").join("")||'<tr><td colspan="9" class="empty">No matching scenario products.</td></tr>';
+ $("scenarioPageInfo").textContent=num(scenarioFiltered.length)+" products · page "+(state.scenarioPage+1)+" of "+pages;
+ $("scenarioPrev").disabled=state.scenarioPage===0;$("scenarioNext").disabled=state.scenarioPage>=pages-1;
+}
+function showDetail(id){
+ const r=S.find(x=>x[0]===id);previousFocus=document.activeElement;
+ $("detailTitle").textContent=C[id][0]+" · "+C[id][1];$("detailSubtitle").textContent="ABC "+C[id][4]+" · "+r[1]+" · snapshot 30 Nov 2011";
+ const fields=[["Assumed on hand",r[3]],["Assumed on order",r[4]],["Assumed reserved",r[5]],["Inventory position",r[7]],["Lead time · days",r[6]],["Mean daily units",r[8].toFixed(2)],["Safety stock",r[10]],["Reorder point",r[11]],["Suggested units",r[13]]];
+ $("detailNumbers").innerHTML=fields.map(f=>"<div><small>"+f[0]+"</small><strong>"+num(f[1])+"</strong></div>").join("");
+ $("detailReason").textContent="Demand screen: "+r[2]+". "+(r[1]==="Manual review"?"Automatic order quantity is blank. Investigate limited, intermittent, missing or concentrated sales history before using the baseline.":"This illustrative baseline uses 90 calendar days, a 1.645 service factor and assumed lead time. It is a review trigger, not a purchase instruction.");
+ $("detailOverlay").hidden=false;$("closeDetail").focus();
+}
+function closeDetail(){$("detailOverlay").hidden=true;if(previousFocus)previousFocus.focus();}
+function showPage(tab){state.tab=tab;for(const el of document.querySelectorAll('[role="tabpanel"]'))el.hidden=el.id!=="page-"+tab;for(const b of document.querySelectorAll("nav button"))b.setAttribute("aria-selected",String(b.dataset.page===tab));$("historicalFilters").hidden=tab==="scenario"||tab==="method";if(tab==="overview")renderOverview();if(tab==="sku")renderSkus();if(tab==="scenario")renderScenario();}
+function render(){if(state.tab==="overview")renderOverview();if(state.tab==="sku")renderSkus();if(state.tab==="scenario")renderScenario();}
+function download(filename,headers,rows){const quote=v=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"';const content=[headers,...rows].map(r=>r.map(quote).join(",")).join("\r\n");const url=URL.createObjectURL(new Blob(["\ufeff"+content],{type:"text/csv;charset=utf-8"})),a=document.createElement("a");a.href=url;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+$("monthFilter").innerHTML='<option value="all">All twelve months</option>'+M.map((m,i)=>'<option value="'+i+'">'+monthName(m)+"</option>").join("");
+$("countryFilter").innerHTML='<option value="all">All included countries</option>'+N.map((c,i)=>'<option value="'+i+'">'+esc(c)+"</option>").join("");
+document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
+$("monthFilter").addEventListener("change",e=>{state.month=e.target.value;state.page=0;render();});
+$("countryFilter").addEventListener("change",e=>{state.country=e.target.value;state.page=0;render();});
+$("resetFilters").addEventListener("click",()=>{state.month="all";state.country="all";state.abc="all";state.q="";state.sort="sales";state.page=0;$("monthFilter").value="all";$("countryFilter").value="all";$("skuAbc").value="all";$("skuSearch").value="";$("skuSort").value="sales";render();});
+$("exploreSkus").addEventListener("click",()=>showPage("sku"));
+for(const [id,key] of [["skuSearch","q"],["skuAbc","abc"],["skuSort","sort"]])$(id).addEventListener(id==="skuSearch"?"input":"change",e=>{state[key]=e.target.value;state.page=0;renderSkus();});
+for(const [id,key] of [["scenarioSearch","scenarioQ"],["scenarioAbc","scenarioAbc"],["scenarioStatus","scenarioStatus"]])$(id).addEventListener(id==="scenarioSearch"?"input":"change",e=>{state[key]=e.target.value;state.scenarioPage=0;renderScenario();});
+$("skuPrev").onclick=()=>{state.page--;renderSkus();};$("skuNext").onclick=()=>{state.page++;renderSkus();};
+$("scenarioPrev").onclick=()=>{state.scenarioPage--;renderScenario();};$("scenarioNext").onclick=()=>{state.scenarioPage++;renderScenario();};
+$("scenarioRows").addEventListener("click",e=>{const row=e.target.closest("[data-sku-index]");if(row)showDetail(+row.dataset.skuIndex);});
+$("scenarioRows").addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){const row=e.target.closest("[data-sku-index]");if(row){e.preventDefault();showDetail(+row.dataset.skuIndex);}}});
+$("closeDetail").onclick=closeDetail;$("detailOverlay").onclick=e=>{if(e.target===$("detailOverlay"))closeDetail();};document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDetail();if(e.key==="Tab"&&!$("detailOverlay").hidden){e.preventDefault();$("closeDetail").focus();}});
+$("exportSkus").onclick=()=>download("sku_performance.csv",["sku","description","fixed_full_period_abc","gross_units","gross_sales_gbp","credit_value_gbp","signed_value_gbp","sales_period","country_selection"],skuFiltered.map(([id,v])=>[C[id][0],C[id][1],C[id][4],v[0],(v[1]/100).toFixed(2),(v[2]/100).toFixed(2),((v[1]-v[2])/100).toFixed(2),state.month==="all"?"2010-12 to 2011-11":M[+state.month],state.country==="all"?"All included countries":N[+state.country]]));
+$("exportScenario").onclick=()=>download("synthetic_inventory_review_queue.csv",["sku","description","abc_class","scenario_flag","demand_status","on_hand_units","on_order_units","reserved_units","lead_time_days","inventory_position_units","reorder_point_units","suggested_order_units","data_nature","snapshot_date","lookback_days"],scenarioFiltered.map(r=>[C[r[0]][0],C[r[0]][1],C[r[0]][4],r[1],r[2],r[3],r[4],r[5],r[6],r[7],r[11],r[13],"SYNTHETIC_SCENARIO","2011-11-30",90]));
+window.portfolio={version:"1.0",getState:()=>({...state}),overview,scenarioRows,showPage};
+renderOverview();
+</script>
+</body>
+</html>

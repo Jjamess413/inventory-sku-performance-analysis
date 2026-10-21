@@ -1,6 +1,6 @@
 {
   "passed": true,
-  "queries_executed": 10,
+  "queries_executed": 11,
   "queries": [
     {
       "file": "02_business_queries.sql",
@@ -51,6 +51,11 @@
       "file": "03_credit_review.sql",
       "statement": 2,
       "result_rows": 1
+    },
+    {
+      "file": "04_monthly_performance.sql",
+      "statement": 1,
+      "result_rows": 12
     }
   ]
 }

@@ -1,0 +1,274 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "ScenarioQueue",
+  "position": {
+    "x": 24,
+    "y": 379,
+    "z": 379,
+    "width": 1232,
+    "height": 363,
+    "tabOrder": 379
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Illustrative stock policy review queue'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#182B3D'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Segoe UI'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#DCE5EB'"
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimSKU"
+                    }
+                  },
+                  "Property": "sku"
+                }
+              },
+              "queryRef": "DimSKU.sku",
+              "nativeQueryRef": "sku",
+              "displayName": "SKU"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DimSKU"
+                    }
+                  },
+                  "Property": "abc_class"
+                }
+              },
+              "queryRef": "DimSKU.abc_class",
+              "nativeQueryRef": "abc_class",
+              "displayName": "ABC"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "InventoryScenario"
+                    }
+                  },
+                  "Property": "scenario_flag"
+                }
+              },
+              "queryRef": "InventoryScenario.scenario_flag",
+              "nativeQueryRef": "scenario_flag",
+              "displayName": "Review status"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "InventoryScenario"
+                    }
+                  },
+                  "Property": "demand_status"
+                }
+              },
+              "queryRef": "InventoryScenario.demand_status",
+              "nativeQueryRef": "demand_status",
+              "displayName": "Demand screen"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "InventoryScenario"
+                    }
+                  },
+                  "Property": "on_hand_units"
+                }
+              },
+              "queryRef": "InventoryScenario.on_hand_units",
+              "nativeQueryRef": "on_hand_units",
+              "displayName": "On hand"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "InventoryScenario"
+                    }
+                  },
+                  "Property": "inventory_position_units"
+                }
+              },
+              "queryRef": "InventoryScenario.inventory_position_units",
+              "nativeQueryRef": "inventory_position_units",
+              "displayName": "Position"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "InventoryScenario"
+                    }
+                  },
+                  "Property": "reorder_point_units"
+                }
+              },
+              "queryRef": "InventoryScenario.reorder_point_units",
+              "nativeQueryRef": "reorder_point_units",
+              "displayName": "Reorder point"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "InventoryScenario"
+                    }
+                  },
+                  "Property": "suggested_order_units"
+                }
+              },
+              "queryRef": "InventoryScenario.suggested_order_units",
+              "nativeQueryRef": "suggested_order_units",
+              "displayName": "Suggested units"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "InventoryScenario"
+                    }
+                  },
+                  "Property": "days_cover"
+                }
+              },
+              "queryRef": "InventoryScenario.days_cover",
+              "nativeQueryRef": "days_cover",
+              "displayName": "Days cover"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

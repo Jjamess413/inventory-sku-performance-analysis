@@ -1,0 +1,14 @@
+{
+  "name": "Inventory Portfolio",
+  "dataColors": [
+    "#087E78",
+    "#4E7192",
+    "#C7933D",
+    "#83949F",
+    "#9CBDB4",
+    "#9A79A0"
+  ],
+  "background": "#F3F6F8",
+  "foreground": "#182B3D",
+  "tableAccent": "#087E78"
+}

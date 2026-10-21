@@ -31,7 +31,7 @@ if __name__ == "__main__":
         connection.create_function("SQRT", 1, math.sqrt, deterministic=True)
         connection.create_function("CEIL", 1, math.ceil, deterministic=True)
         query_results = []
-        for name in ["02_business_queries.sql", "03_credit_review.sql"]:
+        for name in ["02_business_queries.sql", "03_credit_review.sql", "04_monthly_performance.sql"]:
             for number, sql in enumerate(statements((ROOT / "sql" / name).read_text()), 1):
                 result = pd.read_sql_query(sql, connection)
                 query_results.append({"file": name, "statement": number, "result_rows": len(result)})

@@ -2,9 +2,23 @@
 
 Prioritise retail products by sales contribution and build a transparent stock review process.
 
-**Status: SQL analysis foundation validated. Power BI dashboard and independent owner walkthrough pending.**
+**Delivery:** validated SQL/Python analysis, an offline interactive dashboard and a native three-page Power BI project. The executive overview was refreshed in Windows Power BI Desktop on 21 October 2026; all four control totals match. Further native page/interaction checks are recorded separately.
 
 This portfolio case study uses public UK retail transactions. All stock balances, reservations, purchase quantities and supplier lead times are **synthetic assumptions**. It demonstrates analytical methods relevant to my business analysis experience; it does not use Shangpin Yitai's data or claim an implemented business outcome.
+
+## Review the project
+
+![Executive overview in Power BI Desktop after refresh](powerbi/screenshots/powerbi-executive-overview.png)
+
+Actual owner-provided Power BI Desktop capture. Sales £9,655,544.63, units 5,263,714, orders 18,957 and active SKUs 3,789 match the SQL reference. See [Desktop evidence and remaining checks](reports/powerbi_desktop_validation.json).
+
+The completed browser dashboard includes an executive overview, searchable SKU explorer and a separately labelled synthetic stock review queue. Month/country filters, product details, pagination and CSV exports work offline.
+
+- **Open the dashboard:** [download the repository ZIP](https://github.com/Jjamess413/inventory-sku-performance-analysis/archive/refs/heads/main.zip), extract it, then open `dashboard/index.html` in a browser. The HTML is self-contained.
+- **Open Power BI:** follow [START_HERE.md](START_HERE.md). The project includes four import tables, three single-direction relationships, 24 DAX measures and three authored report pages.
+- **Read the business case:** [case study](reports/CASE_STUDY.md), [findings](reports/findings.md) and [monthly performance](reports/monthly_performance.csv).
+
+Additional captures of the [browser dashboard](dashboard/screenshots/) are kept separately from the [native Power BI capture](powerbi/screenshots/).
 
 ## Business questions
 
@@ -43,6 +57,8 @@ python -m pip install -r requirements.txt
 python scripts/build.py
 python -m unittest discover -s tests -v
 python scripts/run_queries.py
+python scripts/build_dashboard.py
+python scripts/build_powerbi.py
 ```
 
 The build downloads the original UCI archive, verifies its SHA-256 checksum, classifies transactions, creates a SQLite database, exports dashboard tables and writes reports. It does not require a Kaggle account or API key.
@@ -67,6 +83,9 @@ Raw files, customer IDs and large transaction exports are excluded from Git. The
 | [SQL](sql/) | Schema, analytical views and runnable business questions |
 | [KPI definitions](docs/kpi_definitions.md) | Population, period, units, formula and limitations |
 | [Power BI](powerbi/) | Model, Power Query starter, DAX and dashboard build instructions |
+| [Browser dashboard](dashboard/) | Working offline report, template and actual browser captures |
+| [Start here](START_HERE.md) | Open the delivered Power BI project and check its totals |
+| [Career presentation](docs/CAREER_PRESENTATION.md) | Evidence-based project description and interview notes |
 | [Findings](reports/findings.md) | Evidence, hypotheses, recommendations and success measures |
 | [Learning exercises](docs/learning_exercises.md) | Small SQL tasks and interview discussion prompts |
 | [Progress](docs/PROGRESS.md) | Completed work, owner tasks and next-session handover |
@@ -78,7 +97,7 @@ SQL covers filters, aggregation, `HAVING`, inner/left joins, `CASE`, CTEs, cumul
 
 The inventory module estimates safety stock and reorder points only for SKUs meeting a simple history and concentration screen. Other SKUs receive a manual review flag and a blank order recommendation. The screen is a teaching baseline, not a validated forecasting model.
 
-The checked-in [validation report](reports/validation.json) records row reconciliation, referential integrity, monetary and volume reconciliation, ABC coverage, scenario labelling and eligibility checks. Hand-calculated tests check cleaning and business-rule edge cases.
+The checked-in [validation report](reports/validation.json) records row reconciliation, referential integrity, monetary and volume reconciliation, ABC coverage, scenario labelling and eligibility checks. Ten hand-calculated business-rule tests pass. Additional [dashboard data checks](reports/portfolio_validation.json), [15 browser runtime checks](reports/dashboard_runtime_validation.json) and [Power BI source checks](reports/powerbi_source_validation.json) document the delivered artefacts. JSON/schema validation is separate from Desktop execution.
 
 ## Important limits
 
@@ -87,10 +106,10 @@ The checked-in [validation report](reports/validation.json) records row reconcil
 - Exact repeats are retained because the data lacks an original unique invoice-line key. A deduplication sensitivity is reported.
 - Actual stock, supplier deliveries, availability, lost sales, COGS and margins are unavailable. Actual stockout rate, financial inventory turnover and realised savings cannot be measured.
 - Recent observed sales are a demand proxy. Unrecorded stockouts, closures, returns and product introductions can bias it. One year does not establish repeatable annual seasonality.
-- The Power Query and DAX files are prepared for hands-on Desktop validation. No PBIX or Power BI dashboard screenshots have been produced yet.
+- Windows Desktop refresh and the executive overview's four control totals are confirmed by the linked screenshot. The other native pages and slicer interactions have not yet been independently reviewed; see the evidence record for the exact scope.
 
 ## Source and attribution
 
 Chen, D. (2015). **Online Retail** [Dataset]. UCI Machine Learning Repository. [DOI: 10.24432/C5BW33](https://doi.org/10.24432/C5BW33). [Source page](https://archive.ics.uci.edu/dataset/352/online+retail). Dataset licence: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Filtering, classification, aggregation and scenario additions are documented in this repository. See [data attribution](DATA_ATTRIBUTION.md).
 
-Author: **James You**, Sydney. [LinkedIn](https://www.linkedin.com/in/zi-hao-you-1231112ab/).
+Author: **James You**, Sydney. [LinkedIn](https://www.linkedin.com/in/zihao-james-you-1231112ab/).

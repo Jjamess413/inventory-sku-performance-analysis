@@ -1,6 +1,6 @@
 # Findings and proposed management actions
 
-Analysis: included UK merchandise orders, 1 December 2010–30 November 2011. Currency: GBP. These are historical observations and hypothetical recommendations, not realised improvements at an employer.
+Analysis: included merchandise orders from a UK-based retailer across all included countries, 1 December 2010–30 November 2011. Currency: GBP. These are historical observations and hypothetical recommendations, not realised improvements at an employer.
 
 ## 1. Prioritise the commercial core
 
@@ -27,6 +27,8 @@ Evidence: [SKU credit review](sku_credit_review.csv), [same-day offset candidate
 ## 3. Plan for the observed late-period rise, then validate the cause
 
 **Observed:** November 2011 gross merchandise sales are £1,457,742.24, 31.72% above October's £1,106,666.53. November is the highest complete month in this window.
+
+November gross units are 750,081 versus October's 621,728, an increase of 20.64%. Revenue grew faster than units; product/price mix and order concentration are investigation topics rather than confirmed causes. See [monthly performance with both growth measures](monthly_performance.csv).
 
 **Hypotheses:** holiday demand, wholesale orders and product mix may contribute. One observed annual cycle does not establish a repeatable seasonal pattern or prove the cause of the rise.
 

@@ -1,11 +1,12 @@
-# Dashboard screenshots
+# Native Power BI screenshots
 
-No Power BI screenshots have been produced yet. This folder records a pending milestone, not a finished dashboard.
+[powerbi-executive-overview.png](powerbi-executive-overview.png) is an actual owner-provided Windows Power BI Desktop screenshot taken after refresh on 21 October 2026. It shows three page tabs and the executive overview's rendered charts.
 
-After building and validating the actual report in Desktop, add one readable image for each page:
+| Control total | Screenshot and SQL reference |
+| --- | ---: |
+| Gross merchandise sales | £9,655,544.63 |
+| Gross units | 5,263,714 |
+| Sales orders | 18,957 |
+| Active SKUs | 3,789 |
 
-1. Executive Overview, with GBP labels and the reporting period.
-2. SKU & Inventory Performance, with the historical/scenario distinction visible.
-3. Stock Optimisation & Recommendations, with the synthetic label, snapshot date and assumptions visible.
-
-Use actual report captures. Do not substitute generated dashboard images or Python charts and call them Power BI screenshots.
+The capture confirms the visible overview. Detailed SKU/scenario page and slicer checks remain separately recorded in [Desktop validation](../../reports/powerbi_desktop_validation.json). Browser captures are in [dashboard/screenshots](../../dashboard/screenshots/).

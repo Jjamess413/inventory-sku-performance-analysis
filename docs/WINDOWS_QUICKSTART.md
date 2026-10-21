@@ -61,7 +61,7 @@ Expected successful checks:
 
 - The build prints `"status": "PASS"`, with 14 checks, 511,035 model rows and 3,789 model SKUs.
 - Unit tests report `Ran 10 tests` and `OK`.
-- The saved-query runner completes and writes `reports/query_validation.json` with `"passed": true` and `"queries_executed": 10`.
+- The saved-query runner completes and writes `reports/query_validation.json` with `"passed": true` and `"queries_executed": 11`.
 
 The first Windows build's 14 pipeline checks have been observed in James's terminal screenshot. The Windows unit-test and saved-query results have not yet been reviewed; the expectations above do not mark those tasks complete.
 

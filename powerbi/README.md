@@ -1,15 +1,27 @@
 # Power BI Desktop build guide
 
-**Current status:** model design, Power Query starters and DAX measures are prepared. They have not been executed in Power BI Desktop. PBIX, visual interactions and dashboard screenshots remain to be built and checked by James.
+**Current delivery:** a native [InventoryPortfolio.pbip](InventoryPortfolio.pbip) project with four import tables, three single-direction relationships, 24 measures and three report pages. Public JSON schema and field-reference checks pass. An owner-provided Windows Desktop screenshot confirms the refreshed executive overview and all four control totals. Other native page and slicer checks remain listed in the [Desktop evidence record](../reports/powerbi_desktop_validation.json).
 
-The SQL/Python analysis runs independently. This guide is the next hands-on milestone; it must not be described as a completed Power BI dashboard.
+## Open the ready project
+
+Follow [START_HERE.md](../START_HERE.md). The portable package already supplies the local CSV inputs. Double-click `OPEN_POWERBI.cmd` at the root, then click **Refresh** in Desktop. The launcher configures the data-folder parameter from the extracted folder; the pages, relationships and measures are already present.
+
+For a fresh Git clone, run `scripts/build.py`, `scripts/build_dashboard.py` and `scripts/build_powerbi.py` first. Full transaction CSVs and the database are deliberately excluded from Git.
+
+The semantic model uses supported TMSL `model.bim` and the report uses PBIR. [all_measures.dax](all_measures.dax) mirrors the authored model. [Source validation](../reports/powerbi_source_validation.json) documents what has been checked; it does not claim Desktop execution.
+
+The corrected 21 October package aligns the report shell with Microsoft report-authoring CLI 0.5.0: `definition.pbir` binding version 4.0, PBIR content version 2.0.0, report platform metadata, and a registered base-theme resource. Its [offline CLI validation](../reports/powerbi_cli_validation.json) reports zero diagnostics. The corrected project was reopened and refreshed successfully; the [executive overview capture](screenshots/powerbi-executive-overview.png) records the result.
+
+The included `Fluent2-CY26SU10.json` base theme comes from the official CLI scaffold. Microsoft's MIT [licence](MICROSOFT_LICENSE) and [notice](MICROSOFT_NOTICE) are retained. Reference: [Microsoft PBIR authoring scaffold documentation](https://github.com/microsoft/skills-for-fabric/blob/main/skills/powerbi-report-cli/references/authoring-part-02.md).
+
+The remaining sections are a manual construction/reference guide, not required hand-authoring steps for the delivered PBIP.
 
 ## 1. Generate the inputs
 
-Run `python scripts/build.py`. The five local inputs are in `data/processed/`:
+Run `python scripts/build.py` followed by `python scripts/build_dashboard.py`. Local inputs are in `data/processed/`:
 
 - `fact_transactions.csv`
-- `dim_sku.csv`
+- `dim_sku_portfolio.csv` (the extended product dimension with fixed ABC, revenue rank and display label)
 - `dim_date.csv`
 - `inventory_scenario.csv`
 - `demand_stats.csv` (optional diagnostic table; not required in the report model)
@@ -42,7 +54,7 @@ Mark DimDate as the date table using its date column. Sort month labels by an ap
 
 ## 4. Add measures
 
-Create each expression in [measures.dax](measures.dax) as a separate measure. A DAX file with multiple definitions cannot be pasted into one measure editor.
+The delivered PBIP already contains the measures. For manual recreation, [all_measures.dax](all_measures.dax) lists all definitions; [measures.dax](measures.dax) retains the earlier starter set. A DAX file with multiple definitions cannot be pasted into one measure editor.
 
 Format GBP measures as pounds sterling, quantities as whole numbers, and percentages as percentages. Keep the scenario label visible beside every stock visual. The independent SUMX check should match the stored line-value sum.
 
@@ -81,6 +93,6 @@ Test slicers, cross-highlighting, page navigation and resetting filters. Confirm
 
 Save a local PBIX once totals and interactions pass. Export one readable screenshot per page into `powerbi/screenshots/`. Retain the source code and model documentation alongside screenshots. The repository currently ignores PBIX files so a file is not published accidentally before its contents are reviewed.
 
-Only mark this milestone complete after the actual PBIX and screenshots exist and James can explain the relationships, filter context and key measures. Do not add a “completed dashboard” claim based on this guide alone.
+Record native acceptance after the actual Desktop project refresh, control totals and interactions pass and actual Desktop captures are available. Owner learning/explanation is tracked separately and has been deferred by explicit request on 21 October 2026. Browser screenshots must remain labelled as browser screenshots.
 
 Reference: [Microsoft Power BI star-schema guidance](https://learn.microsoft.com/power-bi/guidance/star-schema), [relationships](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-relationships-understand), [measures](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-measures), [SUMX](https://learn.microsoft.com/dax/sumx-function-dax).

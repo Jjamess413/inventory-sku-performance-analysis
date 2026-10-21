@@ -40,3 +40,7 @@ The scenario generator uses a stable SHA-256 hash of each SKU to assign coverage
 The full download URL and reviewed SHA-256 checksums are in [config.json](../config.json). The build fails if the source bytes change. The source contains missing values despite a contradictory missing-value summary on its catalogue page; the downloaded workbook and [data-quality report](../reports/data_quality.json) are the authority for this analysis.
 
 See [DATA_ATTRIBUTION.md](../DATA_ATTRIBUTION.md) for the citation, CC BY 4.0 link and adaptations. Raw and processed transaction files remain local; shareable aggregates and synthetic assumptions are committed.
+
+## Portfolio export addition
+
+The dashboard builder creates `data/processed/dim_sku_portfolio.csv` from the same 3,789-SKU dimension and materialised ABC analysis. It adds the fixed full-period revenue rank and a SKU/product display label for the authored Power BI report. The original `dim_sku.csv` is retained. The extended export contains no customer identifiers.

@@ -104,3 +104,16 @@ transaction_type  transaction_lines  signed_units  signed_transaction_value_gbp
 03_credit_review.sql, question 2: 1 result rows; showing up to 10
   sku  gross_units  credited_units  gross_sales_gbp  signed_transaction_value_gbp
 23166        77826           74494         81448.21                       3968.57
+
+04_monthly_performance.sql, question 1: 12 result rows; showing up to 10
+sales_month  units_sold  previous_month_units_sold  units_mom_pct  gross_sales_gbp  previous_month_sales_gbp  sales_mom_pct
+    2010-12      358743                        NaN            NaN        777865.64                       NaN            NaN
+    2011-01      387422                   358743.0           7.99        671914.94                 777865.64         -13.62
+    2011-02      283243                   387422.0         -26.89        508869.75                 671914.94         -24.27
+    2011-03      377071                   283243.0          33.13        691132.59                 508869.75          35.82
+    2011-04      308509                   377071.0         -18.18        516194.91                 691132.59         -25.31
+    2011-05      395378                   308509.0          28.16        741153.76                 516194.91          43.58
+    2011-06      388826                   395378.0          -1.66        738751.87                 741153.76          -0.32
+    2011-07      401329                   388826.0           3.22        689289.86                 738751.87          -6.70
+    2011-08      421439                   401329.0           5.01        725493.76                 689289.86           5.25
+    2011-09      569945                   421439.0          35.24       1030468.78                 725493.76          42.04

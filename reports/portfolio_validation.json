@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "checks": {
+    "source_analysis_passed": true,
+    "all_3789_skus_in_catalog": true,
+    "all_3789_skus_in_scenario": true,
+    "gross_sales_pence": true,
+    "gross_units": true,
+    "credit_pence": true,
+    "orders_disjoint_across_month_country": true,
+    "sales_orders": true,
+    "twelve_months": true,
+    "november_sales_growth": true,
+    "manual_review_order_is_null": true
+  },
+  "aggregate_rows": 62679,
+  "html_sha256": "208ab1e8d84c702f2d5947cec2a9af128bc3303d390e001213e7e017f970e781",
+  "data_grain": "SKU x calendar month x customer country; no source invoice rows or customer IDs",
+  "browser_runtime_test": "Recorded separately in dashboard_runtime_validation.json",
+  "powerbi_desktop_validation": "Pending owner Windows refresh and visual confirmation"
+}

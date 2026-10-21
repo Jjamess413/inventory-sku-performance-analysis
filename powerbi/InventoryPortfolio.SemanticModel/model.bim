@@ -1,0 +1,638 @@
+{
+  "name": "InventoryPortfolio",
+  "compatibilityLevel": 1567,
+  "model": {
+    "culture": "en-GB",
+    "sourceQueryCulture": "en-GB",
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "tables": [
+      {
+        "name": "FactTransactions",
+        "lineageTag": "34ec8b26-73bd-5507-b7a7-02e794ba52d1",
+        "columns": [
+          {
+            "name": "source_line_id",
+            "dataType": "int64",
+            "sourceColumn": "source_line_id",
+            "lineageTag": "47d832e0-6a8c-5d33-9bb8-dc92e2807cf3",
+            "summarizeBy": "none",
+            "formatString": "#,0",
+            "isHidden": true
+          },
+          {
+            "name": "invoice_no",
+            "dataType": "string",
+            "sourceColumn": "invoice_no",
+            "lineageTag": "c2267457-f03a-5158-9e05-aa87091a0833",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "sku",
+            "dataType": "string",
+            "sourceColumn": "sku",
+            "lineageTag": "2e598ad5-505c-5878-b4d2-244afc1ee04a",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "date",
+            "dataType": "dateTime",
+            "sourceColumn": "date",
+            "lineageTag": "68214086-5383-522a-b171-224d62ee9afe",
+            "summarizeBy": "none",
+            "formatString": "yyyy-MM-dd"
+          },
+          {
+            "name": "quantity",
+            "dataType": "int64",
+            "sourceColumn": "quantity",
+            "lineageTag": "5f015dd2-c44a-5ad2-b9d3-8371c3931573",
+            "summarizeBy": "none",
+            "formatString": "#,0"
+          },
+          {
+            "name": "unit_price_pence",
+            "dataType": "int64",
+            "sourceColumn": "unit_price_pence",
+            "lineageTag": "93716701-e8bd-5667-ab0e-9b8dca679f56",
+            "summarizeBy": "none",
+            "formatString": "#,0",
+            "isHidden": true
+          },
+          {
+            "name": "revenue_pence",
+            "dataType": "int64",
+            "sourceColumn": "revenue_pence",
+            "lineageTag": "d6406b12-b6d4-579e-925d-2f9608608d93",
+            "summarizeBy": "none",
+            "formatString": "#,0",
+            "isHidden": true
+          },
+          {
+            "name": "country",
+            "dataType": "string",
+            "sourceColumn": "country",
+            "lineageTag": "922ec528-ac63-50f9-9f96-2aeff6a8da64",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "transaction_type",
+            "dataType": "string",
+            "sourceColumn": "transaction_type",
+            "lineageTag": "10760113-64ea-5615-835d-d473710ecd97",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "is_exact_repeat",
+            "dataType": "int64",
+            "sourceColumn": "is_exact_repeat",
+            "lineageTag": "ee1f3bff-a68f-51d5-909b-0e8b53125ad5",
+            "summarizeBy": "none",
+            "formatString": "#,0",
+            "isHidden": true
+          }
+        ],
+        "partitions": [
+          {
+            "name": "FactTransactions",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": "let\n    Source = fxLoadCsv(\"fact_transactions.csv\", {\n        {\"source_line_id\", Int64.Type}, {\"invoice_no\", type text}, {\"sku\", type text},\n        {\"date\", type date}, {\"quantity\", Int64.Type}, {\"unit_price_pence\", Int64.Type},\n        {\"revenue_pence\", Int64.Type}, {\"country\", type text},\n        {\"transaction_type\", type text}, {\"is_exact_repeat\", Int64.Type}\n    }),\n    TrimmedKeys = Table.TransformColumns(Source, {\n        {\"sku\", Text.Trim, type text}, {\"invoice_no\", Text.Trim, type text}\n    }),\n    Invalid = Table.SelectRows(TrimmedKeys, each\n        [sku] = null or [sku] = \"\" or [unit_price_pence] <= 0\n        or [revenue_pence] <> [quantity] * [unit_price_pence]\n    ),\n    Output = if Table.RowCount(Invalid) > 0\n        then error \"Unexpected transaction values. Review the pipeline output.\"\n        else TrimmedKeys\nin\n    Output\n"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "measures": [
+          {
+            "name": "Gross Merchandise Sales GBP",
+            "expression": "DIVIDE (\n    CALCULATE (\n        SUM ( FactTransactions[revenue_pence] ),\n        FactTransactions[transaction_type] = \"sale\"\n    ),\n    100\n)",
+            "lineageTag": "5664ed93-25bc-53b5-8b96-1820127124c7",
+            "formatString": "£#,0.00;(£#,0.00);£0.00",
+            "displayFolder": "Historical sales"
+          },
+          {
+            "name": "Gross Units",
+            "expression": "CALCULATE (\n    SUM ( FactTransactions[quantity] ),\n    FactTransactions[transaction_type] = \"sale\"\n)",
+            "lineageTag": "c30a29d1-bd2a-5750-b8ad-5ddb76614d21",
+            "formatString": "#,0",
+            "displayFolder": "Historical sales"
+          },
+          {
+            "name": "Sales Orders",
+            "expression": "CALCULATE (\n    DISTINCTCOUNT ( FactTransactions[invoice_no] ),\n    FactTransactions[transaction_type] = \"sale\"\n)",
+            "lineageTag": "260f0299-91f4-53dd-a7a8-7fa4d59c802f",
+            "formatString": "#,0",
+            "displayFolder": "Historical sales"
+          },
+          {
+            "name": "Active SKUs",
+            "expression": "CALCULATE (\n    DISTINCTCOUNT ( FactTransactions[sku] ),\n    FactTransactions[transaction_type] = \"sale\"\n)",
+            "lineageTag": "0f515d66-eacd-591a-95eb-52537e8a4b18",
+            "formatString": "#,0",
+            "displayFolder": "Historical sales"
+          },
+          {
+            "name": "Cancellation Value GBP",
+            "expression": "-DIVIDE (\n    CALCULATE (\n        SUM ( FactTransactions[revenue_pence] ),\n        FactTransactions[transaction_type] = \"cancellation\"\n    ),\n    100\n)",
+            "lineageTag": "e1810635-6d9a-5fd8-a51b-2553ef71500f",
+            "formatString": "£#,0.00;(£#,0.00);£0.00",
+            "displayFolder": "Historical sales"
+          },
+          {
+            "name": "Signed Transaction Value GBP",
+            "expression": "[Gross Merchandise Sales GBP] - [Cancellation Value GBP]",
+            "lineageTag": "3ad329ab-6642-5e98-8081-c40d75284701",
+            "formatString": "£#,0.00;(£#,0.00);£0.00",
+            "displayFolder": "Historical sales"
+          },
+          {
+            "name": "Average Units Per Order",
+            "expression": "DIVIDE ( [Gross Units], [Sales Orders] )",
+            "lineageTag": "98e30f20-77b7-55e6-976d-36fd9fa949c0",
+            "formatString": "#,0.00",
+            "displayFolder": "Historical sales"
+          },
+          {
+            "name": "SKU Revenue Rank",
+            "expression": "IF (\n    NOT ISBLANK ( [Gross Merchandise Sales GBP] ),\n    RANKX (\n        ALLSELECTED ( DimSKU ),\n        [Gross Merchandise Sales GBP],\n        ,\n        DESC,\n        DENSE\n    )\n)",
+            "lineageTag": "271511fc-8ca2-5dbb-bc24-f5783851e014",
+            "formatString": "#,0",
+            "displayFolder": "Historical sales"
+          },
+          {
+            "name": "Gross Sales SUMX Check GBP",
+            "expression": "DIVIDE (\n    SUMX (\n        FILTER ( FactTransactions, FactTransactions[transaction_type] = \"sale\" ),\n        FactTransactions[quantity] * FactTransactions[unit_price_pence]\n    ),\n    100\n)",
+            "lineageTag": "b8a50e16-49bc-5579-92ed-d681e024e8cd",
+            "formatString": "£#,0.00;(£#,0.00);£0.00",
+            "displayFolder": "Historical sales"
+          },
+          {
+            "name": "Gross Sales Calculation Difference GBP",
+            "expression": "[Gross Merchandise Sales GBP] - [Gross Sales SUMX Check GBP]",
+            "lineageTag": "8ea26beb-80c6-589a-a412-398c47cb83b5",
+            "formatString": "£#,0.00;(£#,0.00);£0.00",
+            "displayFolder": "Historical sales"
+          },
+          {
+            "name": "Scenario On Hand Units",
+            "expression": "SUM ( InventoryScenario[on_hand_units] )",
+            "lineageTag": "7236eb84-b22e-5d35-a3c4-cebc4d8ba013",
+            "formatString": "#,0",
+            "displayFolder": "Scenario (synthetic)"
+          },
+          {
+            "name": "Scenario SKUs Due Reorder Review",
+            "expression": "CALCULATE (\n    COUNTROWS ( InventoryScenario ),\n    InventoryScenario[scenario_flag] = \"Reorder review\"\n)",
+            "lineageTag": "99b85920-5fb1-552d-989a-0ba48690c8bc",
+            "formatString": "#,0",
+            "displayFolder": "Scenario (synthetic)"
+          },
+          {
+            "name": "Scenario SKUs Excess Cover Review",
+            "expression": "CALCULATE (\n    COUNTROWS ( InventoryScenario ),\n    InventoryScenario[scenario_flag] = \"Excess cover review\"\n)",
+            "lineageTag": "523acedd-63e3-5819-a14c-b021c3e55a7d",
+            "formatString": "#,0",
+            "displayFolder": "Scenario (synthetic)"
+          },
+          {
+            "name": "Scenario SKUs Manual Review",
+            "expression": "CALCULATE (\n    COUNTROWS ( InventoryScenario ),\n    InventoryScenario[scenario_flag] = \"Manual review\"\n)",
+            "lineageTag": "fedda1d0-5cf1-51fa-bffa-82bc8df08aad",
+            "formatString": "#,0",
+            "displayFolder": "Scenario (synthetic)"
+          },
+          {
+            "name": "Scenario Suggested Order Units",
+            "expression": "SUM ( InventoryScenario[suggested_order_units] )",
+            "lineageTag": "fce797d3-1f2b-559b-b7ea-e59766f65a7a",
+            "formatString": "#,0",
+            "displayFolder": "Scenario (synthetic)"
+          },
+          {
+            "name": "Scenario Label",
+            "expression": "\"Synthetic stock scenario | 30 November 2011 | Fixed 90-day lookback\"",
+            "lineageTag": "8bd62c5e-4fd4-5554-af40-c985bc7c8c1f",
+            "displayFolder": "Scenario (synthetic)"
+          },
+          {
+            "name": "ABC Share of Sales",
+            "expression": "DIVIDE([Gross Merchandise Sales GBP], CALCULATE([Gross Merchandise Sales GBP], REMOVEFILTERS(DimSKU[abc_class])))",
+            "lineageTag": "27154304-3458-5a64-936c-b030fba7be02",
+            "formatString": "0.00%",
+            "displayFolder": "Historical sales"
+          },
+          {
+            "name": "Top Ten SKU Sales GBP",
+            "expression": "IF(SELECTEDVALUE(DimSKU[revenue_rank], 999999) <= 10, [Gross Merchandise Sales GBP])",
+            "lineageTag": "0c098e2e-1ded-52b6-aea0-4223e43d2e55",
+            "formatString": "£#,0.00;(£#,0.00);£0.00",
+            "displayFolder": "Historical sales"
+          },
+          {
+            "name": "SKU Units Rank",
+            "expression": "IF(NOT ISBLANK([Gross Units]), RANKX(ALLSELECTED(DimSKU), [Gross Units], , DESC, DENSE))",
+            "lineageTag": "e1dfd3f2-9570-5b29-8412-884373ab29b0",
+            "formatString": "#,0",
+            "displayFolder": "Historical sales"
+          },
+          {
+            "name": "Top Ten SKU Units",
+            "expression": "IF([SKU Units Rank] <= 10, [Gross Units])",
+            "lineageTag": "891969b5-1196-51d1-b11e-fdcd157f9423",
+            "formatString": "#,0",
+            "displayFolder": "Historical sales"
+          },
+          {
+            "name": "Previous Month Sales GBP",
+            "expression": "CALCULATE([Gross Merchandise Sales GBP], DATEADD(DimDate[date], -1, MONTH))",
+            "lineageTag": "4165f2ce-10c5-5ac4-a42d-358473ee2e4f",
+            "formatString": "£#,0.00;(£#,0.00);£0.00",
+            "displayFolder": "Historical sales"
+          },
+          {
+            "name": "Sales MoM %",
+            "expression": "DIVIDE([Gross Merchandise Sales GBP] - [Previous Month Sales GBP], [Previous Month Sales GBP])",
+            "lineageTag": "531cf12f-8a8f-5e83-a60b-ba890ef11f86",
+            "formatString": "0.00%",
+            "displayFolder": "Historical sales"
+          },
+          {
+            "name": "Previous Month Units",
+            "expression": "CALCULATE([Gross Units], DATEADD(DimDate[date], -1, MONTH))",
+            "lineageTag": "9bdda079-5ac1-5389-aa83-b5ed53a60991",
+            "formatString": "#,0",
+            "displayFolder": "Historical sales"
+          },
+          {
+            "name": "Units MoM %",
+            "expression": "DIVIDE([Gross Units] - [Previous Month Units], [Previous Month Units])",
+            "lineageTag": "9a6f3009-9811-5f8d-9e46-7772e348793c",
+            "formatString": "0.00%",
+            "displayFolder": "Historical sales"
+          }
+        ]
+      },
+      {
+        "name": "DimSKU",
+        "lineageTag": "c89041fd-afc8-52a3-8abc-77847f13229d",
+        "columns": [
+          {
+            "name": "sku",
+            "dataType": "string",
+            "sourceColumn": "sku",
+            "lineageTag": "d6388036-2e1c-5a1b-90b4-1c22a716d46a",
+            "summarizeBy": "none",
+            "isKey": true
+          },
+          {
+            "name": "description",
+            "dataType": "string",
+            "sourceColumn": "description",
+            "lineageTag": "90ebf85e-141b-5ba4-aa47-19d727a934cb",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "first_sale_date",
+            "dataType": "dateTime",
+            "sourceColumn": "first_sale_date",
+            "lineageTag": "cf416d30-c704-5333-9eba-c9432a280685",
+            "summarizeBy": "none",
+            "formatString": "yyyy-MM-dd"
+          },
+          {
+            "name": "last_sale_date",
+            "dataType": "dateTime",
+            "sourceColumn": "last_sale_date",
+            "lineageTag": "fb84559e-85c5-521a-8ee0-90a0ddf67b29",
+            "summarizeBy": "none",
+            "formatString": "yyyy-MM-dd"
+          },
+          {
+            "name": "abc_class",
+            "dataType": "string",
+            "sourceColumn": "abc_class",
+            "lineageTag": "53e17be5-189a-57ab-a517-1764b6d23a4d",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "revenue_rank",
+            "dataType": "int64",
+            "sourceColumn": "revenue_rank",
+            "lineageTag": "3fe00f18-3961-566e-bb41-cb29e46560da",
+            "summarizeBy": "none",
+            "formatString": "#,0"
+          },
+          {
+            "name": "product_label",
+            "dataType": "string",
+            "sourceColumn": "product_label",
+            "lineageTag": "016f26f0-2ee8-5af5-b72e-2cdfcf9ad10b",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "DimSKU",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": "let\n    Source = fxLoadCsv(\"dim_sku_portfolio.csv\", {\n        {\"sku\", type text}, {\"description\", type text}, {\"first_sale_date\", type date},\n        {\"last_sale_date\", type date}, {\"abc_class\", type text},\n        {\"revenue_rank\", Int64.Type}, {\"product_label\", type text}\n    }),\n    TrimmedKeys = Table.TransformColumns(Source, {{\"sku\", Text.Trim, type text}}),\n    Output = if Table.RowCount(TrimmedKeys) <> Table.RowCount(Table.Distinct(TrimmedKeys, {\"sku\"}))\n        then error \"DimSKU requires one row per SKU. Investigate duplicate keys.\"\n        else TrimmedKeys\nin\n    Output\n"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ]
+      },
+      {
+        "name": "DimDate",
+        "lineageTag": "3fc681ac-7696-5d6b-af54-4d21b1dda186",
+        "columns": [
+          {
+            "name": "date",
+            "dataType": "dateTime",
+            "sourceColumn": "date",
+            "lineageTag": "579de542-7211-5fc9-a8fb-f36289133f9a",
+            "summarizeBy": "none",
+            "formatString": "yyyy-MM-dd",
+            "isKey": true
+          },
+          {
+            "name": "month",
+            "dataType": "string",
+            "sourceColumn": "month",
+            "lineageTag": "0ca96b80-aff5-5b10-87d8-fad70e02fd04",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "year",
+            "dataType": "int64",
+            "sourceColumn": "year",
+            "lineageTag": "f35cfeb9-e8e3-5ad3-a2fe-5b4421abbe54",
+            "summarizeBy": "none",
+            "formatString": "#,0"
+          },
+          {
+            "name": "month_number",
+            "dataType": "int64",
+            "sourceColumn": "month_number",
+            "lineageTag": "28e714b7-74d1-5783-9977-e21ee01a8ef1",
+            "summarizeBy": "none",
+            "formatString": "#,0"
+          },
+          {
+            "name": "day_of_week",
+            "dataType": "int64",
+            "sourceColumn": "day_of_week",
+            "lineageTag": "5a00a2c7-a360-5fca-9fda-5d3fed264f71",
+            "summarizeBy": "none",
+            "formatString": "#,0"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "DimDate",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": "let\n    Source = fxLoadCsv(\"dim_date.csv\", {\n        {\"date\", type date}, {\"month\", type text}, {\"year\", Int64.Type},\n        {\"month_number\", Int64.Type}, {\"day_of_week\", Int64.Type}\n    })\nin\n    Source\n"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "dataCategory": "Time"
+      },
+      {
+        "name": "InventoryScenario",
+        "lineageTag": "c23f92f7-818f-54c1-a915-5c03ce0209b0",
+        "columns": [
+          {
+            "name": "sku",
+            "dataType": "string",
+            "sourceColumn": "sku",
+            "lineageTag": "0d526178-b8a2-55b8-a939-3739922ffa85",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "snapshot_date",
+            "dataType": "dateTime",
+            "sourceColumn": "snapshot_date",
+            "lineageTag": "9ca33823-ff7c-50c7-9b10-527f471476c0",
+            "summarizeBy": "none",
+            "formatString": "yyyy-MM-dd"
+          },
+          {
+            "name": "data_nature",
+            "dataType": "string",
+            "sourceColumn": "data_nature",
+            "lineageTag": "fd2e93eb-fa8c-5569-a5bb-56d89b45ac3e",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "on_hand_units",
+            "dataType": "int64",
+            "sourceColumn": "on_hand_units",
+            "lineageTag": "727d2c62-cb15-53f1-808e-2dd86aadf321",
+            "summarizeBy": "none",
+            "formatString": "#,0"
+          },
+          {
+            "name": "on_order_units",
+            "dataType": "int64",
+            "sourceColumn": "on_order_units",
+            "lineageTag": "ce7c24f5-3af5-5780-9989-003e2ff7e207",
+            "summarizeBy": "none",
+            "formatString": "#,0"
+          },
+          {
+            "name": "reserved_units",
+            "dataType": "int64",
+            "sourceColumn": "reserved_units",
+            "lineageTag": "07851c7a-0dd3-5aef-a19f-57d5fd16cc07",
+            "summarizeBy": "none",
+            "formatString": "#,0"
+          },
+          {
+            "name": "lead_time_days",
+            "dataType": "int64",
+            "sourceColumn": "lead_time_days",
+            "lineageTag": "80e791f9-84e2-5798-bb70-8ad80cc0835a",
+            "summarizeBy": "none",
+            "formatString": "#,0"
+          },
+          {
+            "name": "inventory_position_units",
+            "dataType": "int64",
+            "sourceColumn": "inventory_position_units",
+            "lineageTag": "5f5aaa39-372f-5c52-be64-a1eb74b07874",
+            "summarizeBy": "none",
+            "formatString": "#,0"
+          },
+          {
+            "name": "mean_daily_units",
+            "dataType": "double",
+            "sourceColumn": "mean_daily_units",
+            "lineageTag": "84868001-7d28-5035-aae3-705bef612b06",
+            "summarizeBy": "none",
+            "formatString": "0.00"
+          },
+          {
+            "name": "std_daily_units",
+            "dataType": "double",
+            "sourceColumn": "std_daily_units",
+            "lineageTag": "1b63ce35-3abe-51be-be9f-5ba8c1bae7ac",
+            "summarizeBy": "none",
+            "formatString": "0.00"
+          },
+          {
+            "name": "days_cover",
+            "dataType": "double",
+            "sourceColumn": "days_cover",
+            "lineageTag": "e71d7955-0b22-5087-bc38-457221faaa7d",
+            "summarizeBy": "none",
+            "formatString": "0.00"
+          },
+          {
+            "name": "safety_stock_units",
+            "dataType": "int64",
+            "sourceColumn": "safety_stock_units",
+            "lineageTag": "50b09b90-cd19-57fa-b40b-f9a79f8a5371",
+            "summarizeBy": "none",
+            "formatString": "#,0"
+          },
+          {
+            "name": "reorder_point_units",
+            "dataType": "int64",
+            "sourceColumn": "reorder_point_units",
+            "lineageTag": "8dee7bf9-69aa-579a-9228-e969d6c2a0ab",
+            "summarizeBy": "none",
+            "formatString": "#,0"
+          },
+          {
+            "name": "target_stock_units",
+            "dataType": "int64",
+            "sourceColumn": "target_stock_units",
+            "lineageTag": "d04d1b12-3c28-50ba-8499-5cc508d152ee",
+            "summarizeBy": "none",
+            "formatString": "#,0"
+          },
+          {
+            "name": "suggested_order_units",
+            "dataType": "int64",
+            "sourceColumn": "suggested_order_units",
+            "lineageTag": "759984b3-e4c1-553a-9df5-14fbfbc805c5",
+            "summarizeBy": "none",
+            "formatString": "#,0"
+          },
+          {
+            "name": "demand_status",
+            "dataType": "string",
+            "sourceColumn": "demand_status",
+            "lineageTag": "8efa5bb3-bd17-54b4-b7b6-7775f0f2ab8d",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "scenario_flag",
+            "dataType": "string",
+            "sourceColumn": "scenario_flag",
+            "lineageTag": "8d16a13a-847f-5ec4-9103-5b2ac00d44f3",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "abc_class",
+            "dataType": "string",
+            "sourceColumn": "abc_class",
+            "lineageTag": "f4eb122d-0f2f-5d63-a4ac-4256f16c704d",
+            "summarizeBy": "none"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "InventoryScenario",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": "let\n    Source = fxLoadCsv(\"inventory_scenario.csv\", {\n        {\"sku\", type text}, {\"snapshot_date\", type date}, {\"data_nature\", type text},\n        {\"on_hand_units\", Int64.Type}, {\"on_order_units\", Int64.Type}, {\"reserved_units\", Int64.Type},\n        {\"lead_time_days\", Int64.Type}, {\"inventory_position_units\", Int64.Type},\n        {\"mean_daily_units\", type number}, {\"std_daily_units\", type number}, {\"days_cover\", type number},\n        {\"safety_stock_units\", Int64.Type}, {\"reorder_point_units\", Int64.Type},\n        {\"target_stock_units\", Int64.Type}, {\"suggested_order_units\", Int64.Type},\n        {\"demand_status\", type text}, {\"scenario_flag\", type text}, {\"abc_class\", type text}\n    }),\n    Selected = Table.SelectColumns(Source, {\n        \"sku\", \"snapshot_date\", \"data_nature\", \"on_hand_units\", \"on_order_units\", \"reserved_units\",\n        \"lead_time_days\", \"inventory_position_units\", \"mean_daily_units\", \"std_daily_units\", \"days_cover\",\n        \"safety_stock_units\", \"reorder_point_units\", \"target_stock_units\", \"suggested_order_units\",\n        \"demand_status\", \"scenario_flag\", \"abc_class\"\n    }),\n    InvalidNature = Table.SelectRows(Selected, each [data_nature] <> \"SYNTHETIC_SCENARIO\"),\n    Output = if Table.RowCount(InvalidNature) > 0\n        then error \"Inventory rows must retain their synthetic scenario label.\"\n        else Selected\nin\n    Output\n"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "450fd73a-fc02-50b7-a948-0cd25b70ceac",
+        "fromTable": "FactTransactions",
+        "fromColumn": "sku",
+        "toTable": "DimSKU",
+        "toColumn": "sku",
+        "fromCardinality": "many",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": true
+      },
+      {
+        "name": "dd689275-5f0d-5561-82cc-51ad09f19bb0",
+        "fromTable": "FactTransactions",
+        "fromColumn": "date",
+        "toTable": "DimDate",
+        "toColumn": "date",
+        "fromCardinality": "many",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": true
+      },
+      {
+        "name": "866dc811-760d-54fe-9e32-de2a971e21a5",
+        "fromTable": "InventoryScenario",
+        "fromColumn": "sku",
+        "toTable": "DimSKU",
+        "toColumn": "sku",
+        "fromCardinality": "many",
+        "toCardinality": "one",
+        "crossFilteringBehavior": "oneDirection",
+        "isActive": true
+      }
+    ],
+    "expressions": [
+      {
+        "name": "pDataFolder",
+        "kind": "m",
+        "expression": "\"C:/InventoryPortfolio/data/processed/\" meta [IsParameterQuery=true, Type=\"Text\", IsParameterQueryRequired=true]"
+      },
+      {
+        "name": "fxLoadCsv",
+        "kind": "m",
+        "expression": "// Create pDataFolder as a Text parameter with a trailing path separator.\n// Create this function as one blank query named fxLoadCsv.\n(FileName as text, ColumnTypes as list) as table =>\nlet\n    Source = Csv.Document(\n        File.Contents(pDataFolder & FileName),\n        [Delimiter = \",\", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]\n    ),\n    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),\n    BlankToNull = Table.ReplaceValue(Headers, \"\", null, Replacer.ReplaceValue, Table.ColumnNames(Headers)),\n    Typed = Table.TransformColumnTypes(BlankToNull, ColumnTypes, \"en-AU\")\nin\n    Typed\n"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      },
+      {
+        "name": "PortfolioDataNature",
+        "value": "Public historical sales; inventory balances and lead times are synthetic"
+      }
+    ]
+  }
+}

@@ -1,0 +1,118 @@
+// Authored model definitions; native Desktop execution is confirmed separately.
+
+Gross Merchandise Sales GBP =
+DIVIDE (
+    CALCULATE (
+        SUM ( FactTransactions[revenue_pence] ),
+        FactTransactions[transaction_type] = "sale"
+    ),
+    100
+)
+
+Gross Units =
+CALCULATE (
+    SUM ( FactTransactions[quantity] ),
+    FactTransactions[transaction_type] = "sale"
+)
+
+Sales Orders =
+CALCULATE (
+    DISTINCTCOUNT ( FactTransactions[invoice_no] ),
+    FactTransactions[transaction_type] = "sale"
+)
+
+Active SKUs =
+CALCULATE (
+    DISTINCTCOUNT ( FactTransactions[sku] ),
+    FactTransactions[transaction_type] = "sale"
+)
+
+Cancellation Value GBP =
+-DIVIDE (
+    CALCULATE (
+        SUM ( FactTransactions[revenue_pence] ),
+        FactTransactions[transaction_type] = "cancellation"
+    ),
+    100
+)
+
+Signed Transaction Value GBP =
+[Gross Merchandise Sales GBP] - [Cancellation Value GBP]
+
+Average Units Per Order =
+DIVIDE ( [Gross Units], [Sales Orders] )
+
+SKU Revenue Rank =
+IF (
+    NOT ISBLANK ( [Gross Merchandise Sales GBP] ),
+    RANKX (
+        ALLSELECTED ( DimSKU ),
+        [Gross Merchandise Sales GBP],
+        ,
+        DESC,
+        DENSE
+    )
+)
+
+Gross Sales SUMX Check GBP =
+DIVIDE (
+    SUMX (
+        FILTER ( FactTransactions, FactTransactions[transaction_type] = "sale" ),
+        FactTransactions[quantity] * FactTransactions[unit_price_pence]
+    ),
+    100
+)
+
+Gross Sales Calculation Difference GBP =
+[Gross Merchandise Sales GBP] - [Gross Sales SUMX Check GBP]
+
+Scenario On Hand Units =
+SUM ( InventoryScenario[on_hand_units] )
+
+Scenario SKUs Due Reorder Review =
+CALCULATE (
+    COUNTROWS ( InventoryScenario ),
+    InventoryScenario[scenario_flag] = "Reorder review"
+)
+
+Scenario SKUs Excess Cover Review =
+CALCULATE (
+    COUNTROWS ( InventoryScenario ),
+    InventoryScenario[scenario_flag] = "Excess cover review"
+)
+
+Scenario SKUs Manual Review =
+CALCULATE (
+    COUNTROWS ( InventoryScenario ),
+    InventoryScenario[scenario_flag] = "Manual review"
+)
+
+Scenario Suggested Order Units =
+SUM ( InventoryScenario[suggested_order_units] )
+
+Scenario Label =
+"Synthetic stock scenario | 30 November 2011 | Fixed 90-day lookback"
+
+ABC Share of Sales =
+DIVIDE([Gross Merchandise Sales GBP], CALCULATE([Gross Merchandise Sales GBP], REMOVEFILTERS(DimSKU[abc_class])))
+
+Top Ten SKU Sales GBP =
+IF(SELECTEDVALUE(DimSKU[revenue_rank], 999999) <= 10, [Gross Merchandise Sales GBP])
+
+SKU Units Rank =
+IF(NOT ISBLANK([Gross Units]), RANKX(ALLSELECTED(DimSKU), [Gross Units], , DESC, DENSE))
+
+Top Ten SKU Units =
+IF([SKU Units Rank] <= 10, [Gross Units])
+
+Previous Month Sales GBP =
+CALCULATE([Gross Merchandise Sales GBP], DATEADD(DimDate[date], -1, MONTH))
+
+Sales MoM % =
+DIVIDE([Gross Merchandise Sales GBP] - [Previous Month Sales GBP], [Previous Month Sales GBP])
+
+Previous Month Units =
+CALCULATE([Gross Units], DATEADD(DimDate[date], -1, MONTH))
+
+Units MoM % =
+DIVIDE([Gross Units] - [Previous Month Units], [Previous Month Units])

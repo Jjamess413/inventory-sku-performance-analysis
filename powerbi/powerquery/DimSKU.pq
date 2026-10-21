@@ -1,7 +1,8 @@
 let
-    Source = fxLoadCsv("dim_sku.csv", {
+    Source = fxLoadCsv("dim_sku_portfolio.csv", {
         {"sku", type text}, {"description", type text}, {"first_sale_date", type date},
-        {"last_sale_date", type date}, {"abc_class", type text}
+        {"last_sale_date", type date}, {"abc_class", type text},
+        {"revenue_rank", Int64.Type}, {"product_label", type text}
     }),
     TrimmedKeys = Table.TransformColumns(Source, {{"sku", Text.Trim, type text}}),
     Output = if Table.RowCount(TrimmedKeys) <> Table.RowCount(Table.Distinct(TrimmedKeys, {"sku"}))

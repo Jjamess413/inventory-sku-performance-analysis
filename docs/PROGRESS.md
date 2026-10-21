@@ -1,12 +1,28 @@
 # Progress and next-session handover
 
-Last updated: 19 October 2026. Project owner: James You.
+Last updated: 21 October 2026. Project owner: James You.
 
 ## Status
 
-The SQL analysis foundation is implemented and validated. The Power BI dashboard, owner learning checks and final career presentation are not complete. This project is publicly labelled in development and should not yet be pinned as a finished portfolio piece.
+The SQL/Python analysis and standalone browser dashboard are complete and validated. The native Power BI project has four tables, three relationships, 24 measures and three pages/34 visual containers. Its public JSON structures and field references pass validation. On 21 October James supplied an actual Windows Desktop screenshot after refresh: the executive overview's four control totals match the SQL reference and its charts and three page tabs are visible. Other native page and slicer checks remain in reports/powerbi_desktop_validation.json.
 
-The initial code and documentation were developed with AI-assisted scaffolding. Independent explanation, hands-on modifications and Desktop validation are explicit release requirements.
+On 21 October James explicitly requested delivery today and deferred further learning. The earlier owner-explanation gate is therefore postponed, not reported as completed. The implementation is AI-assisted. Learning notes remain preserved and are separate from artefact acceptance. James subsequently confirmed the delivered report and explicitly authorised publication to GitHub. Native validation claims are limited to the recorded screenshot evidence.
+
+## Delivery work completed on 21 October
+
+The initial package's blank Desktop canvas was resolved by correcting the PBIR content version and adding the scaffolded platform/theme resources. The corrected shell follows Microsoft report-authoring CLI 0.5.0, passes its offline validation with no diagnostics, and adds explicit version/page/resource guards. Subsequent owner screenshots confirm that the three pages load and the refreshed executive overview reconciles.
+
+- [x] Preserve the original checkout and owner notes; implement in an isolated worktree from the current remote main branch.
+- [x] Rerun the ten meaningful business-rule tests and the saved business queries successfully.
+- [x] Add full-period monthly sales/units comparison SQL and export; November growth is 31.72% sales and 20.64% units.
+- [x] Build the standalone interactive browser dashboard from 62,679 SKU/month/country aggregates.
+- [x] Reconcile eleven dashboard data checks, including order grain and blank manual-review recommendations.
+- [x] Pass fifteen Chromium runtime checks covering filters, search, sort, paging, details, export, mobile width and errors.
+- [x] Capture actual browser overview, SKU and scenario pages, labelled separately from Power BI screenshots.
+- [x] Author the native PBIP/PBIR report and TMSL import model; validate public schemas and field references.
+- [x] Prepare an automatic local-path launcher, opening instructions, business case and career presentation notes.
+- [x] Confirm actual Windows Power BI Desktop overview refresh, four control totals, rendered charts and visible page tabs; retain the owner's screenshot.
+- [ ] Review the other native pages and slicer interactions in detail.
 
 ## Completed
 
@@ -38,16 +54,10 @@ The initial code and documentation were developed with AI-assisted scaffolding. 
 
 ## Next actions
 
-- [ ] Run the 10 business-rule unit tests and saved-query runner on James's Windows environment; review the actual output.
-- [ ] Run and report the duplicate-SKU count query; independently explain matching keys and corrected LEFT JOIN row preservation.
-- [ ] Run the monthly-sales CTE starter, add gross sales inside the CTE and expose that column in the outer query; explain the two row grains.
-- [ ] Revisit CASE first-matching-condition behaviour and progress towards ABC cumulative windows.
-- [ ] Confirm James's local Power BI environment and guide the first import.
-- [ ] Build the star schema and reconcile the first two measures in Desktop.
-- [ ] Complete the three report pages, test interactions and save the actual PBIX.
-- [ ] Capture actual Power BI screenshots and check them for clear source/scenario labels.
-- [ ] Explain a SKU recommendation and the cancellation anomaly independently.
-- [ ] Review for release; then pin the completed project and prepare LinkedIn Featured copy, resume bullets and English interview pitches.
+1. Publish the owner's authorised project update, including the actual native overview capture and its evidence record.
+2. Review other native pages and slicer behaviour when continuing validation; preserve the recorded scope of the overview confirmation.
+3. Publish/pin career material with the appropriate completed-component status. Keep native and browser captures labelled by their origin.
+4. Resume independent SQL/DAX/model explanation later, as James requested. Historical learning checks and original submissions remain in learning_log.md.
 
 ## Continuity instructions
 

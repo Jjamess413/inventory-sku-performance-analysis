@@ -1,6 +1,6 @@
 # Portfolio milestones
 
-Only Project 1 is active. Time estimates are focused working hours, not a promise of calendar completion. Learning and owner explanation are part of the work.
+Only Project 1 is active. On 21 October 2026 James prioritised delivery and deferred learning; the earlier time estimates below are historical planning estimates, not remaining hand-authoring time for the delivered report source.
 
 ## Project 1: Inventory & SKU Performance Analysis
 
@@ -8,10 +8,11 @@ Only Project 1 is active. Time estimates are focused working hours, not a promis
 | --- | --- | --- | --- |
 | Source and business scope | Licence, field lineage, stated decisions and limitations | Complete | — |
 | Reproducible SQL foundation | Running build, query files, reports and meaningful checks | Complete | — |
-| Owner SQL understanding | Reviewed aggregation, join, ABC and demand exercises | Pending | 5–8 hours |
-| Power BI model and report | Actual Desktop import, relationships, DAX, three pages and reconciled totals | Pending | 8–12 hours |
-| Business review and release | Owner walkthrough, actual screenshots, polished README and approved release status | Pending | 3–5 hours |
-| Career presentation | Pin, Featured copy, resume bullets and 60-second/three-minute pitches | After release | 2–3 hours |
+| Owner SQL understanding | Guided examples reviewed; independent explanation to continue later | Deferred by owner | Separate learning task |
+| Browser dashboard | Working filters/search/review queue, reconciled data and actual browser captures | Complete | — |
+| Power BI model and report | Four-table model, 24 measures and three pages; actual Windows executive overview refresh and four control totals confirmed | Overview verified | Further page/interaction checks |
+| Business review and release | Case study, findings, actual Desktop/browser captures and README prepared; owner authorised GitHub publication | Ready for publication | Further native checks recorded separately |
+| Career presentation | Evidence-based project bullets and interview notes prepared | Draft notes complete | Profile publication after final native status |
 
 ## Project 2: Logistics Quality & Delivery Analytics
 

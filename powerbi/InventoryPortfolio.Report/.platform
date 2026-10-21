@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "InventoryPortfolio"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "bc079c96-ab5f-5224-9e75-9914185347ab"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "evidence_date": "2026-10-21",
+  "environment": "Power BI Desktop on the owner Windows computer",
+  "evidence_type": "Owner-provided screenshot after refresh",
+  "screenshot": "powerbi/screenshots/powerbi-executive-overview.png",
+  "status": "Executive overview refresh and four control totals confirmed",
+  "checks": {
+    "three_page_tabs_visible": true,
+    "gross_merchandise_sales_gbp": {
+      "expected": 9655544.63,
+      "observed": 9655544.63,
+      "matches": true
+    },
+    "gross_units": {
+      "expected": 5263714,
+      "observed": 5263714,
+      "matches": true
+    },
+    "sales_orders": {
+      "expected": 18957,
+      "observed": 18957,
+      "matches": true
+    },
+    "active_skus": {
+      "expected": 3789,
+      "observed": 3789,
+      "matches": true
+    },
+    "monthly_sales_chart_rendered": true,
+    "abc_contribution_chart_rendered": true,
+    "top_sku_sales_chart_rendered": true
+  },
+  "remaining_checks": [
+    "Native month/country slicer interactions and reset",
+    "SKU Performance page figures and interactions",
+    "Stock Review page counts and fixed-scenario interactions"
+  ],
+  "scope": "Confirms the visible executive overview only. It does not establish that all DAX measures, pages or native interactions have been tested.",
+  "publication_authorized_by_owner": true
+}

@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "checks": {
+    "full_period_kpis_reconcile": true,
+    "november_filter_reconciles": true,
+    "month_and_country_match_independent_sql": true,
+    "scenario_ignores_historical_date_country_filters": true,
+    "scenario_a_class_reorder_count": true,
+    "manual_review_order_quantities_remain_blank": true,
+    "product_details_and_keyboard_close": true,
+    "filtered_scenario_export_preserves_labels": true,
+    "sku_search_and_revenue_reconcile": true,
+    "empty_search_state": true,
+    "unit_sort_and_pagination": true,
+    "method_and_delivery_status_visible": true,
+    "mobile_layout_has_no_body_overflow": true,
+    "no_javascript_runtime_errors": true,
+    "no_external_runtime_requests": true
+  },
+  "executed_in": "Headless Chromium",
+  "artifact": "Standalone browser dashboard",
+  "screenshot_folder": "dashboard/screenshots (not Power BI screenshots)",
+  "desktop_powerbi_execution": "Not performed in this browser test"
+}
